@@ -68,6 +68,7 @@ for (i=0; i<cantidadDeCoches.length-1; i++){
 getIndice = Math.floor ((Math.random() * 10));
 
 getPrimero = cantidadDeCoches[getIndice];
+
 const citSemana= [];
 
 const diaLunes = modeloCit.findIndex((el) => el.at(0) == getPrimero);
@@ -94,6 +95,10 @@ do{
     if (choferes.some ((el) => el.legajo == getLegajo) == true){
 const getIn = choferes.findIndex ((el) => el.legajo == getLegajo);
 
+const getNombre = choferes[getIn].nombre;
+
+const getApellido = choferes[getIn].apellido;
+
 const getCoche = choferes[getIn].coche;
 
 let horariosChofer = [];
@@ -111,10 +116,12 @@ if (choferes[getIn].turno == "Mañana"){
 }
 }
 informeHorario = 
-`Lunes: ${horariosChofer[0]}
-Martes: ${horariosChofer[1]}
-Miercoles: ${horariosChofer[2]}
-Jueves: ${horariosChofer[3]}
+`<h3>Bienvenido ${getNombre} ${getApellido}<h3>
+<h5>Sus citaciones para esta semana son:<h5>
+Lunes: ${horariosChofer[0]}<br>
+Martes: ${horariosChofer[1]}<br>
+Miercoles: ${horariosChofer[2]}<br>
+Jueves: ${horariosChofer[3]}<br>
 Viernes: ${horariosChofer[4]}`
 
 break;
@@ -125,4 +132,4 @@ break;
 }
 }while (choferes.some ((el) => el.legajo == getLegajo) == false);
 
-console.log (informeHorario);
+document.write (informeHorario);
