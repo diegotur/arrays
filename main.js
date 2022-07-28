@@ -114,13 +114,13 @@ for (const item of arrCitacion){
     let m = document.getElementsByClassName(arrFilas.at(0));
     let m1 = document.getElementsByClassName(arrFilas.at(1));
         
-    m[x].innerHTML = `<td class:"d-flex justify-content-center"> ${turnos[x].at(1)}</td>`;
+    m[x].innerHTML = `<td class:""text-center"> ${turnos[x].at(1)}</td>`;
     m1[x].innerHTML = `<td> ${turnos[x].at(2)}</td>`;
 
     llenar.append(dato);
 
     for(i=0;i<=4;i++){
-    let y = document.getElementsByClassName(arrFilas.at(i+2));
+    let y = document.getEqlementsByClassName(arrFilas.at(i+2));
     
     y[x].innerHTML = `<td> ${citSemana[i].at(x)}</td>`;
 
