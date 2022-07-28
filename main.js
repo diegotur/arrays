@@ -120,7 +120,7 @@ for (const item of arrCitacion){
     llenar.append(dato);
 
     for(i=0;i<=4;i++){
-    let y = document.getEqlementsByClassName(arrFilas.at(i+2));
+    let y = document.getElementsByClassName(arrFilas.at(i+2));
     
     y[x].innerHTML = `<td> ${citSemana[i].at(x)}</td>`;
 
