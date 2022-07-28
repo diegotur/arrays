@@ -1,6 +1,16 @@
-*{
-    display: flex;
-    justify-items: center;
-    justify-content: center;
-    align-items: center;
+table thead tr th{
+    
+    text-align: center;
 }
+
+table tbody tr th{
+    
+    text-align: center;
+}
+.center{
+    
+    text-align: center;
+}
+
+
+

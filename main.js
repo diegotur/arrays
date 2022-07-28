@@ -110,23 +110,20 @@ for (const item of arrCitacion){
     let llenar = document.getElementById(item);
     let x = arrCitacion.indexOf(item);
     let dato = turnos[x].at(0);
-    let m = document.getElementsByClassName("row0");
-    let m1 = document.getElementsByClassName("row1");
     
-    let f = document.createElement("td");
-    let f1 = document.createElement("td");
-    f.innerText = turnos[x].at(1);
-    f1.innerText = turnos[x].at(2);
+    let m = document.getElementsByClassName(arrFilas.at(0));
+    let m1 = document.getElementsByClassName(arrFilas.at(1));
+        
+    m[x].innerHTML = `<td class:"d-flex justify-content-center"> ${turnos[x].at(1)}</td>`;
+    m1[x].innerHTML = `<td> ${turnos[x].at(2)}</td>`;
 
     llenar.append(dato);
-    m[x].appendChild(f);
-    m1[x].appendChild(f1);
 
     for(i=0;i<=4;i++){
     let y = document.getElementsByClassName(arrFilas.at(i+2));
-    let create = document.createElement("td");
-    create.innerText = citSemana[i].at(x);
-    y[x].appendChild(create);
+    
+    y[x].innerHTML = `<td> ${citSemana[i].at(x)}</td>`;
+
     }
 }
 
