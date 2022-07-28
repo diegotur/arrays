@@ -1,5 +1,12 @@
 //creo base de datos de choferes
 
+let titulo = document.getElementById("titulo");
+let subtitulo = document.getElementById("subtitulo");
+
+titulo.innerHTML = `<h1>CITACIONES PUENTE URIBURU</h1>`;
+subtitulo.innerHTML = `<h3>CONSULTE LAS CITACIONES SEGUN COCHE</h3>`;
+
+
 class Chofer {
     constructor(apellido, nombre, legajo, turno, coche){
         this.apellido = apellido;
@@ -87,9 +94,71 @@ for (i=0; i<4; i++){
 
 let getLegajo;
 
+
+
+arrCitacion = [];
+
+for (i=0;i<=9;i++){
+    arrCitacion[i] = "columna"+i;   
+}
+
+arrFilas = [];
+
+for (i=0;i<=6;i++){
+    arrFilas[i] = "row"+i;
+    }
+
+let llenar; 
+
+let x = 0;
+
+for (item of arrCitacion){
+    llenar = document.getElementById(item);
+    let dato = turnos[x].at(0);
+    let m = document.getElementsByClassName("row0");
+    let m1 = document.getElementsByClassName("row1");
+    let m2 = document.getElementsByClassName("row2");
+    let m3 = document.getElementsByClassName("row3");
+    let m4 = document.getElementsByClassName("row4");
+    let m5 = document.getElementsByClassName("row5");
+    let m6 = document.getElementsByClassName("row6");
+    let f = document.createElement("td");
+    f.innerText = turnos[x].at(1);
+    let f1 = document.createElement("td");
+    f1.innerText = turnos[x].at(2);
+    let f2 = document.createElement("td");
+    f2.innerText = citSemana[0].at(x);
+    let f3 = document.createElement("td");
+    f3.innerText = citSemana[1].at(x);
+    let f4 = document.createElement("td");
+    f4.innerText = citSemana[2].at(x);
+    let f5 = document.createElement("td");
+    f5.innerText = citSemana[3].at(x);
+    let f6 = document.createElement("td");
+    f6.innerText = citSemana[4].at(x);
+    
+    llenar.append(dato);
+    m[x].appendChild(f);
+    m1[x].appendChild(f1);
+    m2[x].appendChild(f2);
+    m3[x].appendChild(f3);
+    m4[x].appendChild(f4);
+    m5[x].appendChild(f5);
+    m6[x].appendChild(f6);
+    x++;
+}
+/* xx = 0; 
+for (i=0;i<=9;i++){
+    let f = document.getElementsByClassName(arrFilas[xx]);
+    let dato = turnos[xx].at(1);
+    f.append(dato);
+    xx++;
+} */
+
 //pido legajo por prompt y obtengo sus horarios de toda la semana
 
-do{
+
+/* do{
     getLegajo = (parseInt(prompt ("Cuál es su legajo?")));
 
     if (choferes.some ((el) => el.legajo == getLegajo) == true){
@@ -132,4 +201,4 @@ break;
 }
 }while (choferes.some ((el) => el.legajo == getLegajo) == false);
 
-document.write (informeHorario);
+document.write (informeHorario); */
