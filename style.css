@@ -12,5 +12,16 @@ table tbody tr th{
     text-align: center;
 }
 
+.navbar{
+    margin-bottom: 2vh;
+}
+
+.citacionPuente{
+    visibility: hidden;
+}
+
+.citacionTalar{
+    visibility: hidden;
+}
 
 

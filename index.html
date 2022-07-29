@@ -12,13 +12,42 @@
 </head>
 <body>
     <header>
-        <div id="titulo" class="d-flex justify-content-center"> </div>
-        <br>
-        <div id="subtitulo" class="d-flex justify-content-center"> </div> 
-        <br>
+       
+        
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">LINEA 15</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Ver Citaciones</a>
+                  </li>
+                 
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Cabecera
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li id="citacionPuenteLink"><a  class="dropdown-item" href="#">Puente Uriburu</a></li>
+                      <li id="citacionTalarLink"><a class="dropdown-item" href="#">Talar</a></li>
+                     
+                    </ul>
+                  </li>
+                  
+                </ul>
+                <form class="d-flex" role="search">
+                  <input id="inputLegajo" class="form-control me-2" type="search" placeholder="Ingrese su legajo" aria-label="Search" onblur="mostrar3()">
+                  <button id="inputButton" class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+              </div>
+            </div>
+          </nav>
     </header>
 
-    <table class="table table-dark table-striped table-bordered ">
+    <table id="citacionPuente" class="citacionPuente table table-dark table-striped table-bordered ">
     <thead >
         <tr>
         <th scope="col">TURNO</th>
@@ -135,6 +164,124 @@
         
     </tbody>
     </table>
+
+    <table id="citacionTalar" class="citacionTalar table table-dark table-striped table-bordered ">
+        <thead >
+            <tr>
+            <th scope="col">TURNO</th>
+            <th scope="col">CITADO</th>
+            <th scope="col">CITADO</th>
+            <th scope="col">LUNES</th>
+            <th scope="col">MARTES</th>
+            <th scope="col">MIERCOLES</th>
+            <th scope="col">JUEVES</th>
+            <th scope="col">VIERNES</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <th scope="row" id="talarColumna0"></th>
+            <td class="talarRow0 text-center"></td>
+            <td class="talarRow1 text-center"></td>
+            <td class="talarRow2 text-center "></td>
+            <td class="talarRow3 text-center "></td>
+            <td class="talarRow4 text-center "></td>
+            <td class="talarRow5 text-center "></td>
+            <td class="talarRow6 text-center"></td>
+            </tr>
+            <tr>
+            <th scope="row" id="talarColumna1"></th>
+            <td class="talarRow0 text-center"></td>
+            <td class="talarRow1 text-center"></td>
+            <td class="talarRow2 text-center "></td>
+            <td class="talarRow3 text-center "></td>
+            <td class="talarRow4 text-center "></td>
+            <td class="talarRow5 text-center "></td>
+            <td class="talarRow6 text-center"></td>
+            </tr>
+            <tr>
+            <th scope="row" id="talarColumna2"></th>
+            <td class="talarRow0 text-center"></td>
+            <td class="talarRow1 text-center"></td>
+            <td class="talarRow2 text-center "></td>
+            <td class="talarRow3 text-center "></td>
+            <td class="talarRow4 text-center "></td>
+            <td class="talarRow5 text-center "></td>
+            <td class="talarRow6 text-center"></td>
+            </tr>
+            <tr>
+            <th scope="row" id="talarColumna3" ></th>
+            <td class="talarRow0 text-center"></td>
+            <td class="talarRow1 text-center"></td>
+            <td class="talarRow2 text-center "></td>
+            <td class="talarRow3 text-center "></td>
+            <td class="talarRow4 text-center "></td>
+            <td class="talarRow5 text-center "></td>
+            <td class="talarRow6 text-center"></td>
+            </tr>
+            <tr>
+            <th scope="row" id="talarColumna4"></th>
+            <td class="talarRow0 text-center"></td>
+            <td class="talarRow1 text-center"></td>
+            <td class="talarRow2 text-center "></td>
+            <td class="talarRow3 text-center "></td>
+            <td class="talarRow4 text-center "></td>
+            <td class="talarRow5 text-center "></td>
+            <td class="talarRow6 text-center"></td>
+            </tr>
+            <tr>
+            <th scope="row" id="talarColumna5"></th>
+            <td class="talarRow0 text-center"></td>
+            <td class="talarRow1 text-center"></td>
+            <td class="talarRow2 text-center "></td>
+            <td class="talarRow3 text-center "></td>
+            <td class="talarRow4 text-center "></td>
+            <td class="talarRow5 text-center "></td>
+            <td class="talarRow6 text-center"></td>
+            </tr>
+            <tr>
+            <th scope="row" id="talarColumna6"></th>
+            <td class="talarRow0 text-center"></td>
+            <td class="talarRow1 text-center"></td>
+            <td class="talarRow2 text-center "></td>
+            <td class="talarRow3 text-center "></td>
+            <td class="talarRow4 text-center "></td>
+            <td class="talarRow5 text-center "></td>
+            <td class="talarRow6 text-center"></td>
+            </tr>
+            <tr>
+            <th scope="row" id="talarColumna7"></th>
+            <td class="talarRow0 text-center"></td>
+            <td class="talarRow1 text-center"></td>
+            <td class="talarRow2 text-center "></td>
+            <td class="talarRow3 text-center "></td>
+            <td class="talarRow4 text-center "></td>
+            <td class="talarRow5 text-center "></td>
+            <td class="talarRow6 text-center"></td>
+            </tr>
+            <tr>
+            <th scope="row" id="talarColumna8"></th>
+            <td class="talarRow0 text-center"></td>
+            <td class="talarRow1 text-center"></td>
+            <td class="talarRow2 text-center "></td>
+            <td class="talarRow3 text-center "></td>
+            <td class="talarRow4 text-center "></td>
+            <td class="talarRow5 text-center "></td>
+            <td class="talarRow6 text-center"></td>
+            </tr>
+            <tr>
+            <th scope="row" id="talarColumna9"></th>
+            <td class="talarRow0 text-center"></td>
+            <td class="talarRow1 text-center"></td>
+            <td class="talarRow2 text-center "></td>
+            <td class="talarRow3 text-center "></td>
+            <td class="talarRow4 text-center "></td>
+            <td class="talarRow5 text-center "></td>
+            <td class="talarRow6 text-center"></td>
+            </tr>
+            
+        </tbody>
+        </table>
     
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
