@@ -211,70 +211,79 @@ let mostrarTalar = document.getElementById("citacionTalarLink");
     function mostrar (){
         document.getElementById("citacionPuente").style.visibility = "visible";
         document.getElementById("citacionTalar").style.visibility = "hidden";
+        
     }
     mostrarTalar.addEventListener("click", mostrar2);
     function mostrar2 (){
         document.getElementById("citacionPuente").style.visibility = "hidden";
         document.getElementById("citacionTalar").style.visibility = "visible";
-        document.getElementById("citacionPuente").style.position = "absolute";
+       
     }
 
-/* let inputLegajo = document.querySelector("input").value;
+//let inputLegajo = parseInt.document.getElementById("inputLegajo").value;
 
 let mostrarLegajo = document.getElementById("inputButton");
 
+let inputLegajo = parseInt(document.getElementById("inputLegajo").value);
+
+let textModal = document.getElementById("infoChofer")
+
+let mjeWelcome = document.getElementById("staticBackdropLabel")
+
+
 mostrarLegajo.addEventListener("click", mostrar3);
-function mostrar3 (){
-    document.write (document.querySelector("input").value);
-   
-} */
 
-
-
-//pido legajo por prompt y obtengo sus horarios de toda la semana
-
-
-/* do{
-    getLegajo = (parseInt(prompt ("Cuál es su legajo?")));
-
-    if (choferes.some ((el) => el.legajo == getLegajo) == true){
-const getIn = choferes.findIndex ((el) => el.legajo == getLegajo);
-
-const getNombre = choferes[getIn].nombre;
-
-const getApellido = choferes[getIn].apellido;
-
-const getCoche = choferes[getIn].coche;
-
+let getIn;
+let getNombre;
+let getApellio;
+let getCoche;
 let horariosChofer = [];
+let getTurno;
+let informeHorario;
+let welcome;
 
-for (i=0; i<citSemana.length;i++){
-
-let getTurno = citSemana[i].findIndex ((el) => el == getCoche);
-
-if (choferes[getIn].turno == "Mañana"){
-    let hora = turnos[getTurno].at(1);
-    horariosChofer[i] = hora;
-} else{
-    let hora = turnos[getTurno].at(2);
-    horariosChofer[i] = hora;
-}
-}
-informeHorario = 
-`<h3>Bienvenido ${getNombre} ${getApellido}<h3>
-<h5>Sus citaciones para esta semana son:<h5>
-Lunes: ${horariosChofer[0]}<br>
-Martes: ${horariosChofer[1]}<br>
-Miercoles: ${horariosChofer[2]}<br>
-Jueves: ${horariosChofer[3]}<br>
-Viernes: ${horariosChofer[4]}`
-
-break;
-
-} else{
-    alert ("El legajo que ingresó no se encuentra en nuestra base de datos. Intente nuevamente.");
+function mostrar3 (){
+    let inputLegajo = document.getElementById("inputLegajo").value;
+    if (choferes.some ((el) => el.legajo == inputLegajo) == true){
+        getIn = choferes.findIndex ((el) => el.legajo == inputLegajo);
+        getNombre = choferes[getIn].nombre;
+        getApellido = choferes[getIn].apellido;
+        getCoche = choferes[getIn].coche;
+        for (i=0; i<citSemana.length;i++){
     
-}
-}while (choferes.some ((el) => el.legajo == getLegajo) == false);
+            getTurno = citSemana[i].findIndex ((el) => el == getCoche);
+            
+            if (choferes[getIn].turno == "Mañana"){
+                let hora = turnos[getTurno].at(1);
+                horariosChofer[i] = hora;
+            } else{
+                let hora = turnos[getTurno].at(2);
+                horariosChofer[i] = hora;
+            }
+            }
+            welcome = `Bienvenido ${getNombre} ${getApellido}`;
+            informeHorario = `Sus citaciones para esta semana son:
+            
+            Lunes: 
+            ${horariosChofer[0]}
+            
+            Martes: 
+            ${horariosChofer[1]}
+            
+            Miercoles:
+            ${horariosChofer[2]}
+            
+            Jueves:  
+            ${horariosChofer[3]}
+            
+            Viernes:  
+            ${horariosChofer[4]}`
+            
+            mjeWelcome.innerText = welcome;
+            textModal.innerText = informeHorario;
+        } else {
+            mjeWelcome.innerText = "ERROR";
+            textModal.innerText = "El legajo que ingresó no se encuentra en nuestra base de datos. Intente nuevamente.";
 
-document.write (informeHorario); */
+        }
+}

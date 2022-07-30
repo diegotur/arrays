@@ -17,11 +17,11 @@ table tbody tr th{
 }
 
 .citacionPuente{
+    position: absolute;
     visibility: hidden;
 }
 
 .citacionTalar{
+    position: absolute;
     visibility: hidden;
 }
-
-
