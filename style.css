@@ -16,15 +16,7 @@ table tbody tr th{
     margin-bottom: 2vh;
 }
 
-.citacionPuente{
-    position: absolute;
-    visibility: hidden;
-}
 
-.citacionTalar{
-    position: absolute;
-    visibility: hidden;
-}
 #staticBackdropLabel{
     font-size: 3vw;
     text-align: center!important;
@@ -36,3 +28,39 @@ table tbody tr th{
 .modalFlex{
     align-items: flex-end;
 }
+.citacionPuenteGrid{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(10 1fr);
+    grid-gap: 0.2vw;
+    position: absolute;
+    width: 100%;
+    visibility: hidden;
+
+}
+.citacionTalarGrid{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(10 1fr);
+    grid-gap: 0.2vw;
+    
+    
+    visibility: hidden;
+
+}
+.styleDiv{
+    background-color: rgba(0, 128, 0, 0.522);
+    text-align: center;
+    font-size: 2vw;
+    border-width: 1.5vw;
+    border-color: black;
+}
+.styleDiv2{
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 2vw;
+    border-width: 1.5vw;
+    border-color: black;
+}
+
