@@ -217,10 +217,7 @@ let mostrarTalar = document.getElementById("citacionTalarLink");
     function mostrar2 (){
         document.getElementById("citacionPuente").style.visibility = "hidden";
         document.getElementById("citacionTalar").style.visibility = "visible";
-       
     }
-
-//let inputLegajo = parseInt.document.getElementById("inputLegajo").value;
 
 let mostrarLegajo = document.getElementById("inputButton");
 
@@ -230,6 +227,7 @@ let textModal = document.getElementById("infoChofer")
 
 let mjeWelcome = document.getElementById("staticBackdropLabel")
 
+let idChofer = document.getElementById("idChofer");
 
 mostrarLegajo.addEventListener("click", mostrar3);
 
@@ -241,9 +239,17 @@ let horariosChofer = [];
 let getTurno;
 let informeHorario;
 let welcome;
+let citChoferPorDia = [];
+let llenar2;
+
+for (i=0;i<=4;i++){
+    citChoferPorDia[i] = "rowCit"+i;
+}
+
 
 function mostrar3 (){
     let inputLegajo = document.getElementById("inputLegajo").value;
+    document.getElementById("citacionPorChofer").style.visibility = "visible";
     if (choferes.some ((el) => el.legajo == inputLegajo) == true){
         getIn = choferes.findIndex ((el) => el.legajo == inputLegajo);
         getNombre = choferes[getIn].nombre;
@@ -261,29 +267,25 @@ function mostrar3 (){
                 horariosChofer[i] = hora;
             }
             }
-            welcome = `Bienvenido ${getNombre} ${getApellido}`;
-            informeHorario = `Sus citaciones para esta semana son:
-            
-            Lunes: 
-            ${horariosChofer[0]}
-            
-            Martes: 
-            ${horariosChofer[1]}
-            
-            Miercoles:
-            ${horariosChofer[2]}
-            
-            Jueves:  
-            ${horariosChofer[3]}
-            
-            Viernes:  
-            ${horariosChofer[4]}`
+            welcome = `Bienvenido`;   
+            infoChofer = `${getNombre} ${getApellido}`;
+            informeHorario = `Sus citaciones para esta semana son:`;
+
             
             mjeWelcome.innerText = welcome;
+            idChofer.innerText = infoChofer;
             textModal.innerText = informeHorario;
+
+            
+            for (const item of citChoferPorDia){
+                let x = citChoferPorDia.indexOf(item);
+                document.getElementById(item).innerText = horariosChofer[x];
+                
+            }  
         } else {
+            document.getElementById("citacionPorChofer").style.visibility = "hidden";
             mjeWelcome.innerText = "ERROR";
-            textModal.innerText = "El legajo que ingresó no se encuentra en nuestra base de datos. Intente nuevamente.";
+            textModal.innerHTML = "<h3>El legajo que ingresó no se encuentra en nuestra base de datos.<br><br>Intente nuevamente.</h3>";
 
         }
 }

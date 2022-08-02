@@ -12,57 +12,90 @@
 </head>
 <body>
     <header>
-       
-        
+    
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">LINEA 15</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="#">LINEA 15</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
+                    <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Ver Citaciones</a>
-                  </li>
-                 
-                  <li class="nav-item dropdown">
+                    </li>
+                    
+                    <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Cabecera
+                        Cabecera
                     </a>
                     <ul class="dropdown-menu">
-                      <li id="citacionPuenteLink"><a  class="dropdown-item" href="#">Puente Uriburu</a></li>
-                      <li id="citacionTalarLink"><a class="dropdown-item" href="#">Talar</a></li>
-                     
+                        <li id="citacionPuenteLink"><a  class="dropdown-item" href="#">Puente Uriburu</a></li>
+                        <li id="citacionTalarLink"><a class="dropdown-item" href="#">Talar</a></li>
+                        
                     </ul>
-                  </li>
-                  
+                    </li>
+                    
                 </ul>
                 <form class="d-flex" role="search">
-                  <input id="inputLegajo" class="form-control me-2" type="search" placeholder="Ingrese su legajo" aria-label="Search">
-                  <button id="inputButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="submit">Buscar</button>
+                    <input id="inputLegajo" class="form-control me-2" type="search" placeholder="Ingrese su legajo" aria-label="Search">
+                    <button id="inputButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="submit">Buscar</button>
                 </form>
-              </div>
             </div>
-          </nav>
-    </header>
+        </div>
+    </nav>
+</header>
 
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div id="infoChofer"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class= "modal-title" id="staticBackdropLabel"></h3>
+            </div>
+            <div class="modal-header">
+                <div><h4 id="idChofer"></h4></div>
+            </div>
+            <div class="modal-body">
+            <div><h4 id="infoChofer"></h4></div>
+            
+            <br>
+                    <table id="citacionPorChofer" class="table table-dark table-striped table-bordered ">
+                    <thead >
+                        <tr>
+                        <th scope="col">DÍA</th>
+                        <th scope="col">CITACIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row">Lunes</th>
+                        <td id = "rowCit0" class="text-center"></td>
+                        </tr>
+                        <tr>
+                        <th scope="row">Martes</th>
+                        <td id = "rowCit1" class="text-center"></td>
+                        </tr>
+                        <tr>
+                        <th scope="row">Miércoles</th>
+                        <td id = "rowCit2" class="text-center"></td>
+                        </tr>
+                        <tr>
+                        <th scope="row">Jueves</th>
+                        <td id = "rowCit3" class="text-center"></td>
+                        </tr>
+                        <tr>
+                        <th scope="row">Viernes</th>
+                        <td id = "rowCit4" class="text-center"></td>
+                        </tr>
+                    </tbody>
+                    </table>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
     <table id="citacionPuente" class="citacionPuente table table-dark table-striped table-bordered ">

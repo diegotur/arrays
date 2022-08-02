@@ -25,3 +25,14 @@ table tbody tr th{
     position: absolute;
     visibility: hidden;
 }
+#staticBackdropLabel{
+    font-size: 3vw;
+    text-align: center!important;
+}
+#idChofer{
+    font-size: 2vw;
+    text-align: center!important;
+}
+.modalFlex{
+    align-items: flex-end;
+}
