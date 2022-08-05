@@ -164,11 +164,41 @@ for (i=0;i<=6;i++){
     talarArrFilas[i] = "talarRow"+i;
 
 }
+for (i=0;i<=6;i++){
+    arrFilas[i] = "row"+i;
+    talarArrFilas[i] = "talarRow"+i;
 
-for (x=0;x<=9;x++){
+}
+
+let rellenoTurnos=[];
+
+for (x=0;x<=turnos.length;x++){
 
     let llenar = document.getElementById("citacionPuente");
-    const node = document.createElement("div");
+
+    
+    for (i=0;i<=2;i++){
+        let createDiv = document.createElement("div");
+        let createTextDiv = document.createTextNode(turnos[x].at(i));
+        createDiv.classList.add('styleDiv');
+        createDiv.appendChild(createTextDiv);
+        
+        rellenoTurnos[i]=createDiv;
+        //console.log (createDiv);
+        //llenar.appendChild(createDiv);
+        
+    } 
+    for (f=4;f<=8;f++){
+        let w = 0;
+        let createDiv = document.createElement("div");
+        let createTextDiv = document.createTextNode(citSemana[w].at(x));
+        createDiv.classList.add('styleDiv');
+        createDiv.appendChild(createTextDiv) ;
+        rellenoTurnos[f]=createDiv;
+        w++;
+        console.log (rellenoTurnos);
+    }
+    /* const node = document.createElement("div");
     const textnode = document.createTextNode(turnos[x].at(0));
     const node1 = document.createElement("div");
     const textnode1 = document.createTextNode(turnos[x].at(1));
@@ -207,9 +237,9 @@ for (x=0;x<=9;x++){
     llenar.appendChild(node4);
     llenar.appendChild(node5);
     llenar.appendChild(node6);
-    llenar.appendChild(node7);
+    llenar.appendChild(node7); */
 }
-for (x=0;x<=9;x++){
+for (x=0;x<=turnos.length;x++){
 
     let llenar = document.getElementById("citacionTalar");
     const node = document.createElement("div");
