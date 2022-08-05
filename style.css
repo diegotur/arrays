@@ -51,8 +51,10 @@ table tbody tr th{
 .styleDiv{
     background-color: rgba(0, 128, 0, 0.522);
     text-align: center;
-    font-size: 2vw;
-    border-width: 1.5vw;
+    font-size: 2.5vw;
+    height: 10vh;
+    align-content: center;
+    padding-top: 0.3em;
     border-color: black;
 }
 .styleDiv2{
@@ -60,7 +62,7 @@ table tbody tr th{
     color: white;
     text-align: center;
     font-size: 2vw;
-    border-width: 1.5vw;
+    
     border-color: black;
 }
 

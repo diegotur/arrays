@@ -69,6 +69,20 @@ turnos.push(["8", "03:13", "13:57"]);
 turnos.push(["9", "03:27", "13:29"]);
 turnos.push(["11", "03:37", "13:39"]);
 
+acumTurnos=0;
+
+for (const item of turnos){
+    const itemNuevo = {
+        numeroTurno: item.at(0),
+        citacionTM: item.at(1),
+        citacionTT: item.at(2)
+    }
+    ;
+    turnos[acumTurnos] = itemNuevo;
+    acumTurnos++;
+}
+
+
 const talarTurnos = [];
 
 talarTurnos.push(["3", "04:06", "11:25"]);
@@ -134,7 +148,8 @@ for (i=0; i<4; i++){
     x.shift();
     x.push(y);
     citSemana[i + 1] = x;
-}
+    }
+
 
 
 for (i=0; i<4; i++){
@@ -147,33 +162,22 @@ for (i=0; i<4; i++){
 
 let getLegajo;
 
-let arrCitacion = [];
-let talarArrCitacion = [];
+let rellenoCit =[];
 
 for (i=0;i<=9;i++){
-    arrCitacion[i] = "columna"+i;
-    talarArrCitacion[i] = "talarColumna"+i;   
+    rellenoCit.push([, "04:06", "11:25"]);
 }
 
-
-let arrFilas = [];
-let talarArrFilas = [];
-
-for (i=0;i<=6;i++){
-    arrFilas[i] = "row"+i;
-    talarArrFilas[i] = "talarRow"+i;
-
-}
 
 for (x=0;x<=9;x++){
 
     let llenar = document.getElementById("citacionPuente");
     const node = document.createElement("div");
-    const textnode = document.createTextNode(turnos[x].at(0));
+    const textnode = document.createTextNode(turnos[x].numeroTurno);
     const node1 = document.createElement("div");
-    const textnode1 = document.createTextNode(turnos[x].at(1));
+    const textnode1 = document.createTextNode(turnos[x].citacionTM);
     const node2 = document.createElement("div");
-    const textnode2 = document.createTextNode(turnos[x].at(2));
+    const textnode2 = document.createTextNode(turnos[x].citacionTT);
     const node3 = document.createElement("div");
     const textnode3 = document.createTextNode(citSemana[0].at(x));
     const node4 = document.createElement("div");
@@ -315,10 +319,10 @@ function mostrar3 (){
             getTurno = citSemana[i].findIndex ((el) => el == getCoche);
             
             if (choferes[getIn].turno == "Mañana"){
-                let hora = turnos[getTurno].at(1);
+                let hora = turnos[getTurno].citacionTM;
                 horariosChofer[i] = hora;
             } else{
-                let hora = turnos[getTurno].at(2);
+                let hora = turnos[getTurno].citacionTT;
                 horariosChofer[i] = hora;
             }
         }
@@ -328,10 +332,10 @@ function mostrar3 (){
                 getTurno = talarCitSemana[i].findIndex ((el) => el == getCoche);
                 
                 if (choferes[getIn].turno == "Mañana"){
-                    let hora = talarTurnos[getTurno].at(1);
+                    let hora = talarTurnos[getTurno].citacionTM;
                     horariosChofer[i] = hora;
                 } else{
-                    let hora = talarTurnos[getTurno].at(2);
+                    let hora = talarTurnos[getTurno].citacionTT;
                     horariosChofer[i] = hora;
                 }
             }
