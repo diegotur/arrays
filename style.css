@@ -15,14 +15,46 @@ table tbody tr th{
 .navbar{
     margin-bottom: 2vh;
 }
-
-
-#staticBackdropLabel{
+.nav-link{
     font-size: 3vw;
-    text-align: center!important;
+    color: rgb(255, 255, 255);
+}
+.nav-link:hover{
+    color:white;
+}
+.dropdown-menu{
+    font-size: 2.2vw;
+    margin-left: 50%;
+}
+.modal-header, .modal-footer{
+    background-color: darkgreen;
+}
+.modal-content{
+    border:none;
+}
+#inputButton{
+    color: black;
+    background-color: white;
+}
+#inputLegajo::placeholder{
+    color: white;
+}
+#inputLegajo{
+    color: white;
+    background-color: rgb(11, 138, 64);
+}
+
+#closeBtn{
+    background-color: white;
+    color: black;
 }
 #idChofer{
-    font-size: 2vw;
+    font-style: oblique;
+    color: white;
+    height: 4vh;
+    font-size: 180%;
+    padding-top: 6%;
+    padding-bottom: 8%;
     text-align: center!important;
 }
 .modalFlex{
@@ -43,25 +75,61 @@ table tbody tr th{
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(10 1fr);
     grid-gap: 0.2vw;
-    
-    
     visibility: hidden;
 
 }
 .styleDiv{
-    background-color: rgba(0, 128, 0, 0.522);
-    text-align: center;
+    background-color: rgba(169, 198, 128, 0.477);
+    text-align: center !important;
+    padding-top:15%;
+    padding-bottom: 15%;
     font-size: 2.5vw;
-    height: 10vh;
-    align-content: center;
-    padding-top: 0.3em;
+    
     border-color: black;
 }
 .styleDiv2{
     background-color: black;
     color: white;
     text-align: center;
-    font-size: 2vw;
-    
+    font-size: 2.5vw;
+    padding-top:15%;
+    padding-bottom: 15%;
     border-color: black;
+}
+
+@media screen and (max-width:768px) {
+    .nav-link{
+        font-size: 5vw;
+    }
+    .dropdown-menu{
+        font-size: 4.2vw;
+        margin-left: 0;
+    }
+    .styleDiv{
+        background-color: rgb(169, 198, 128, 0.477);
+        text-align: center !important;
+        padding-top:15%;
+        padding-bottom: 15%;
+        font-size: 3.5vw;
+        
+        border-color: black;
+    }
+    .styleDiv2{
+        background-color: black;
+        color: white;
+        text-align: center;
+        font-size: 2.5vw;
+        padding-top:15%;
+        padding-bottom: 15%;
+        border-color: black;
+    }
+    #staticBackdropLabel{
+        font-size: 5vw;
+        text-align: center!important;
+        justify-self: center!important;
+    }
+    #idChofer{
+        font-size: 160%;
+        text-align: center!important;
+    }
 }

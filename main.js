@@ -69,19 +69,6 @@ turnos.push(["8", "03:13", "13:57"]);
 turnos.push(["9", "03:27", "13:29"]);
 turnos.push(["11", "03:37", "13:39"]);
 
-acumTurnos=0;
-
-for (const item of turnos){
-    const itemNuevo = {
-        numeroTurno: item.at(0),
-        citacionTM: item.at(1),
-        citacionTT: item.at(2)
-    }
-    ;
-    turnos[acumTurnos] = itemNuevo;
-    acumTurnos++;
-}
-
 
 const talarTurnos = [];
 
@@ -144,7 +131,7 @@ talarCitSemana[0]= talarModeloCit[talarDiaLunes];
 
 for (i=0; i<4; i++){
     let y = citSemana[0].at(i);
-    let x =  citSemana[i].map((n) => n);
+    let x = citSemana[i].map((n) => n);
     x.shift();
     x.push(y);
     citSemana[i + 1] = x;
@@ -160,103 +147,43 @@ for (i=0; i<4; i++){
     talarCitSemana[i + 1] = x;
 }
 
+for (i=0;i<citSemana.length;i++){
+    for (p=0;p<citSemana[i].length;p++){
+    turnos[p].push(citSemana[i].at(p));
+    }
+}
+for (const item of turnos){
+    for (i=0; i<turnos[i].length; i++){
+        let llenar = document.getElementById("citacionPuente");
+        const node = document.createElement("div");
+        const textnode = document.createTextNode(item.at(i));
+        node.classList.add('styleDiv');
+        node.appendChild(textnode);
+        llenar.appendChild(node);
+    }
+}
+
+for (i=0;i<talarCitSemana.length;i++){
+    for (p=0;p<talarCitSemana[i].length;p++){
+    talarTurnos[p].push(talarCitSemana[i].at(p));
+    }
+}
+for (const item of talarTurnos){
+    for (i=0; i<talarTurnos[i].length; i++){
+        let llenar = document.getElementById("citacionTalar");
+        const node = document.createElement("div");
+        const textnode = document.createTextNode(item.at(i));
+        node.appendChild(textnode);
+        node.classList.add('styleDiv');
+        llenar.appendChild(node);
+    }
+}
+
+
 let getLegajo;
 
-let rellenoCit =[];
-
-for (i=0;i<=9;i++){
-    rellenoCit.push([, "04:06", "11:25"]);
-}
 
 
-for (x=0;x<=9;x++){
-
-    let llenar = document.getElementById("citacionPuente");
-    const node = document.createElement("div");
-    const textnode = document.createTextNode(turnos[x].numeroTurno);
-    const node1 = document.createElement("div");
-    const textnode1 = document.createTextNode(turnos[x].citacionTM);
-    const node2 = document.createElement("div");
-    const textnode2 = document.createTextNode(turnos[x].citacionTT);
-    const node3 = document.createElement("div");
-    const textnode3 = document.createTextNode(citSemana[0].at(x));
-    const node4 = document.createElement("div");
-    const textnode4 = document.createTextNode(citSemana[1].at(x));
-    const node5 = document.createElement("div");
-    const textnode5 = document.createTextNode(citSemana[2].at(x));
-    const node6 = document.createElement("div");
-    const textnode6 = document.createTextNode(citSemana[3].at(x));
-    const node7 = document.createElement("div");
-    const textnode7 = document.createTextNode(citSemana[4].at(x));
-    node.classList.add('styleDiv');
-    node1.classList.add('styleDiv');
-    node2.classList.add('styleDiv');
-    node3.classList.add('styleDiv');
-    node4.classList.add('styleDiv');
-    node5.classList.add('styleDiv');
-    node6.classList.add('styleDiv');
-    node7.classList.add('styleDiv');
-    node.appendChild(textnode);
-    node1.appendChild(textnode1);
-    node2.appendChild(textnode2);
-    node3.appendChild(textnode3);
-    node4.appendChild(textnode4);
-    node5.appendChild(textnode5);
-    node6.appendChild(textnode6);
-    node7.appendChild(textnode7);
-    llenar.appendChild(node);
-    llenar.appendChild(node1);
-    llenar.appendChild(node2);
-    llenar.appendChild(node3);
-    llenar.appendChild(node4);
-    llenar.appendChild(node5);
-    llenar.appendChild(node6);
-    llenar.appendChild(node7);
-}
-for (x=0;x<=9;x++){
-
-    let llenar = document.getElementById("citacionTalar");
-    const node = document.createElement("div");
-    const textnode = document.createTextNode(talarTurnos[x].at(0));
-    const node1 = document.createElement("div");
-    const textnode1 = document.createTextNode(talarTurnos[x].at(1));
-    const node2 = document.createElement("div");
-    const textnode2 = document.createTextNode(talarTurnos[x].at(2));
-    const node3 = document.createElement("div");
-    const textnode3 = document.createTextNode(talarCitSemana[0].at(x));
-    const node4 = document.createElement("div");
-    const textnode4 = document.createTextNode(talarCitSemana[1].at(x));
-    const node5 = document.createElement("div");
-    const textnode5 = document.createTextNode(talarCitSemana[2].at(x));
-    const node6 = document.createElement("div");
-    const textnode6 = document.createTextNode(talarCitSemana[3].at(x));
-    const node7 = document.createElement("div");
-    const textnode7 = document.createTextNode(talarCitSemana[4].at(x));
-    node.classList.add('styleDiv');
-    node1.classList.add('styleDiv');
-    node2.classList.add('styleDiv');
-    node3.classList.add('styleDiv');
-    node4.classList.add('styleDiv');
-    node5.classList.add('styleDiv');
-    node6.classList.add('styleDiv');
-    node7.classList.add('styleDiv');
-    node.appendChild(textnode);
-    node1.appendChild(textnode1);
-    node2.appendChild(textnode2);
-    node3.appendChild(textnode3);
-    node4.appendChild(textnode4);
-    node5.appendChild(textnode5);
-    node6.appendChild(textnode6);
-    node7.appendChild(textnode7);
-    llenar.appendChild(node);
-    llenar.appendChild(node1);
-    llenar.appendChild(node2);
-    llenar.appendChild(node3);
-    llenar.appendChild(node4);
-    llenar.appendChild(node5);
-    llenar.appendChild(node6);
-    llenar.appendChild(node7);
-}
 
 let mostrarPuente = document.getElementById("citacionPuenteLink");
 let mostrarTalar = document.getElementById("citacionTalarLink");
@@ -278,8 +205,6 @@ let mostrarLegajo = document.getElementById("inputButton");
 let inputLegajo = parseInt(document.getElementById("inputLegajo").value);
 
 let textModal = document.getElementById("infoChofer")
-
-let mjeWelcome = document.getElementById("staticBackdropLabel")
 
 let idChofer = document.getElementById("idChofer");
 
@@ -311,7 +236,7 @@ function mostrar3 (){
         getCoche = choferes[getIn].coche;
         getCabecera = choferes[getIn].cabecera;
 
-       
+
         
         if (getCabecera=="Puente Uriburu"){
         for (i=0; i<citSemana.length;i++){
@@ -319,10 +244,10 @@ function mostrar3 (){
             getTurno = citSemana[i].findIndex ((el) => el == getCoche);
             
             if (choferes[getIn].turno == "Mañana"){
-                let hora = turnos[getTurno].citacionTM;
+                let hora = turnos[getTurno].at(1);
                 horariosChofer[i] = hora;
             } else{
-                let hora = turnos[getTurno].citacionTT;
+                let hora = turnos[getTurno].at(2);
                 horariosChofer[i] = hora;
             }
         }
@@ -332,21 +257,21 @@ function mostrar3 (){
                 getTurno = talarCitSemana[i].findIndex ((el) => el == getCoche);
                 
                 if (choferes[getIn].turno == "Mañana"){
-                    let hora = talarTurnos[getTurno].citacionTM;
+                    let hora = talarTurnos[getTurno].at(1);
                     horariosChofer[i] = hora;
                 } else{
-                    let hora = talarTurnos[getTurno].citacionTT;
+                    let hora = talarTurnos[getTurno].at(2);
                     horariosChofer[i] = hora;
                 }
             }
         }
             
-            welcome = `Bienvenido`;   
+        
             infoChofer = `${getNombre} ${getApellido}`;
             informeHorario = `Sus citaciones para esta semana son:`;
 
             
-            mjeWelcome.innerText = welcome;
+            
             idChofer.innerText = infoChofer;
             textModal.innerText = informeHorario;
 
@@ -358,7 +283,7 @@ function mostrar3 (){
             }  
         } else {
             document.getElementById("citacionPorChofer").style.visibility = "hidden";
-            mjeWelcome.innerText = "ERROR";
+            idChofer.innerText = "";
             textModal.innerHTML = "<h3>El legajo que ingresó no se encuentra en nuestra base de datos.<br><br>Intente nuevamente.</h3>";
 
         }

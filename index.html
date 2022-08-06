@@ -15,22 +15,19 @@
     
         <nav class="navbar sm-8 navbar-expand-md navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">LINEA 15</a>
+                <a class="navbar-brand" href="#"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Ver Citaciones</a>
-                    </li>
                     
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Cabecera
+                        Ver Citaciones Por Cabecera
                     </a>
                     <ul class="dropdown-menu">
-                        <li id="citacionPuenteLink"><a  class="dropdown-item" href="#">Puente Uriburu</a></li>
+                        <li id="citacionPuenteLink"><a class="dropdown-item" href="#">Puente Uriburu</a></li>
                         <li id="citacionTalarLink"><a class="dropdown-item" href="#">Talar</a></li>
                         
                     </ul>
@@ -50,9 +47,7 @@
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 class= "modal-title" id="staticBackdropLabel"></h3>
-            </div>
+          
             <div class="modal-header">
                 <div><h4 id="idChofer"></h4></div>
             </div>
@@ -60,7 +55,7 @@
             <div><h4 id="infoChofer"></h4></div>
             
             <br>
-                    <table id="citacionPorChofer" class=" table table-dark table-striped table-bordered">
+                    <table id="citacionPorChofer" class="table table-success table-striped">
                     <thead >
                         <tr>
                         <th scope="col">DÍA</th>
@@ -92,7 +87,7 @@
                     </table>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
