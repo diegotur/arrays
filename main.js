@@ -1,18 +1,25 @@
 //creo base de datos de choferes
 
+const choferes = JSON.parse(localStorage.getItem("choferes")) ?? [];
 
-class Chofer {
-    constructor(apellido, nombre, legajo, turno, coche, cabecera){
-        this.apellido = apellido;
-        this.nombre = nombre;
-        this.legajo = legajo;
-        this.turno = turno;
-        this.coche = coche;
-        this.cabecera = cabecera;
+
+if (choferes.length == 0){
+
+    
+    class Chofer {
+        constructor(apellido, nombre, legajo, turno, coche, cabecera, consulta){
+            this.apellido = apellido;
+            this.nombre = nombre;
+            this.legajo = legajo;
+            this.turno = turno;
+            this.coche = coche;
+            this.cabecera = cabecera;
+            this.consulta = 0;
+            
         }
-}
-const choferes = [];    
-
+    }
+    
+    
 choferes.push(new Chofer("Alfonso", "Franco Roberto", "3100", "Mañana","1", "Puente Uriburu"));
 choferes.push(new Chofer("Jimenez", "Leonardo Ezequiel", "2738", "Mañana","2", "Puente Uriburu"));
 choferes.push(new Chofer("Soto", "Ariel Abel", "2939", "Mañana","3", "Puente Uriburu"));
@@ -54,25 +61,16 @@ choferes.push(new Chofer("Albarracín", "Hernán Diego", "2685", "Tarde","47", "
 choferes.push(new Chofer("Nuñez", "Luis Omar", "2822", "Mañana","49", "Talar"));
 choferes.push(new Chofer("Avendaño", "Marcos César", "2592", "Tarde","49", "Talar"));
 
+}
+
+
 //const enviarConsultasPorLegajo = [];
 
 
-if (localStorage.getItem("enviarConsultasPorLegajo"==null)){
 
-    let acum=0;
-        for (const elem of choferes){
-            const enviarConsultasPorLegajo = [];    
-        elem.consulta = 0;
-
-        enviarConsultasPorLegajo[acum] = [elem.legajo, elem.nombre, elem.apellido, elem.consulta];
-
-        acum++;
-    }
-}
-localStorage.setItem ("enviarConsultasPorLegajo", JSON.stringify (enviarConsultasPorLegajo));
+//console.log(consultasPorLegajo[2]);
 
 
-const consultasPorLegajo = JSON.parse(localStorage.getItem("consultasPorLegajo"));
 
 
 
@@ -252,25 +250,6 @@ for (i=0;i<=4;i++){
     citChoferPorDia[i] = "rowCit"+i;
 }
 
-/* function Parsear (element){
-    JSON.parse(element);
-    return;
-} */
-
-
-
-//const consultasPorLegajo = [];
-function Estadistica (){
-    let acum = 0;
-    //const consultasPorLegajo = [];
-    
-    
-    for (const elem of choferes){
-      
-        acum++;
-    }
-    localStorage.setItem ("consultasPorLegajo", JSON.stringify (consultasPorLegajo));
-}
 
 function mostrar3 (){
     let inputLegajo = document.getElementById("inputLegajo").value;
@@ -282,9 +261,9 @@ function mostrar3 (){
         getCoche = choferes[getIn].coche;
         getCabecera = choferes[getIn].cabecera;
         choferes[getIn].consulta++;
-
-        Estadistica();
+        localStorage.setItem ("choferes", JSON.stringify (choferes));
         
+
         if (getCabecera=="Puente Uriburu"){
         for (i=0; i<citSemana.length;i++){
     
