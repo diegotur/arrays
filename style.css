@@ -35,6 +35,15 @@ table tbody tr th{
 #inputButton{
     color: black;
     background-color: white;
+    
+}
+#estadisticaButton{
+    color: white;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin-left: 15vw;
+
 }
 #inputLegajo::placeholder{
     color: black;
