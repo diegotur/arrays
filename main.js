@@ -1,5 +1,6 @@
 //creo base de datos de choferes
 
+
 class Chofer {
     constructor(apellido, nombre, legajo, turno, coche, cabecera){
         this.apellido = apellido;
@@ -8,7 +9,7 @@ class Chofer {
         this.turno = turno;
         this.coche = coche;
         this.cabecera = cabecera;
-    }
+        }
 }
 const choferes = [];    
 
@@ -52,6 +53,27 @@ choferes.push(new Chofer("Strefechi", "Ivan Alejandro", "3036", "Mañana","47", 
 choferes.push(new Chofer("Albarracín", "Hernán Diego", "2685", "Tarde","47", "Talar"));
 choferes.push(new Chofer("Nuñez", "Luis Omar", "2822", "Mañana","49", "Talar"));
 choferes.push(new Chofer("Avendaño", "Marcos César", "2592", "Tarde","49", "Talar"));
+
+//const enviarConsultasPorLegajo = [];
+
+
+if (localStorage.getItem("enviarConsultasPorLegajo"==null)){
+
+    let acum=0;
+        for (const elem of choferes){
+            const enviarConsultasPorLegajo = [];    
+        elem.consulta = 0;
+
+        enviarConsultasPorLegajo[acum] = [elem.legajo, elem.nombre, elem.apellido, elem.consulta];
+
+        acum++;
+    }
+}
+localStorage.setItem ("enviarConsultasPorLegajo", JSON.stringify (enviarConsultasPorLegajo));
+
+
+const consultasPorLegajo = JSON.parse(localStorage.getItem("consultasPorLegajo"));
+
 
 
 //creo base de datos de turnos 
@@ -182,7 +204,8 @@ for (const item of talarTurnos){
 
 let getLegajo;
 
-
+let cantConsultasPuente = localStorage.getItem ("cantConsultasPuente");
+let cantConsultasTalar = localStorage.getItem ("cantConsultasTalar");
 
 
 let mostrarPuente = document.getElementById("citacionPuenteLink");
@@ -192,12 +215,16 @@ let mostrarTalar = document.getElementById("citacionTalarLink");
     function mostrar (){
         document.getElementById("citacionPuente").style.visibility = "visible";
         document.getElementById("citacionTalar").style.visibility = "hidden";
+        cantConsultasPuente++;
+        localStorage.setItem ("cantConsultasPuente", cantConsultasPuente);
         
     }
     mostrarTalar.addEventListener("click", mostrar2);
     function mostrar2 (){
         document.getElementById("citacionPuente").style.visibility = "hidden";
         document.getElementById("citacionTalar").style.visibility = "visible";
+        cantConsultasTalar++;
+        localStorage.setItem ("cantConsultasTalar", cantConsultasTalar);
     }
 
 let mostrarLegajo = document.getElementById("inputButton");
@@ -225,6 +252,25 @@ for (i=0;i<=4;i++){
     citChoferPorDia[i] = "rowCit"+i;
 }
 
+/* function Parsear (element){
+    JSON.parse(element);
+    return;
+} */
+
+
+
+//const consultasPorLegajo = [];
+function Estadistica (){
+    let acum = 0;
+    //const consultasPorLegajo = [];
+    
+    
+    for (const elem of choferes){
+      
+        acum++;
+    }
+    localStorage.setItem ("consultasPorLegajo", JSON.stringify (consultasPorLegajo));
+}
 
 function mostrar3 (){
     let inputLegajo = document.getElementById("inputLegajo").value;
@@ -235,8 +281,9 @@ function mostrar3 (){
         getApellido = choferes[getIn].apellido;
         getCoche = choferes[getIn].coche;
         getCabecera = choferes[getIn].cabecera;
+        choferes[getIn].consulta++;
 
-
+        Estadistica();
         
         if (getCabecera=="Puente Uriburu"){
         for (i=0; i<citSemana.length;i++){
@@ -287,4 +334,4 @@ function mostrar3 (){
             textModal.innerHTML = "<h3>El legajo que ingresó no se encuentra en nuestra base de datos.<br><br>Intente nuevamente.</h3>";
 
         }
-}
+} 
