@@ -32,7 +32,24 @@
                         
                     </ul>
                     </li>
-                    <button id="estadisticaButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="submit">Ver Estadística</button>
+                    
+                        <button type="button" id = "estadisticaButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver Estadística</button>
+                    
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Estadística</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div><h4 id ="infoEstadistica"></h4></div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                 </ul>
                 <form class="d-flex" role="search">
                     <input id="inputLegajo" class="form-control me-2" type="search" placeholder="Ingrese su legajo" aria-label="Search">

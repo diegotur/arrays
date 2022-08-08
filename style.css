@@ -43,6 +43,8 @@ table tbody tr th{
     border: none;
     box-shadow: none;
     margin-left: 15vw;
+    font-size: 1.5vw;
+    color: rgb(215, 215, 163);
 
 }
 #inputLegajo::placeholder{
@@ -61,7 +63,7 @@ table tbody tr th{
     background-color: white;
     color: black;
 }
-#idChofer{
+#idChofer, #exampleModalLabel{
     font-style: oblique;
     color: white;
     height: 4vh;
@@ -69,6 +71,9 @@ table tbody tr th{
     padding-top: 6%;
     padding-bottom: 8%;
     text-align: center!important;
+}
+#infoEstadistica h4{
+    text-decoration:underline  ;
 }
 .modalFlex{
     align-items: flex-end;

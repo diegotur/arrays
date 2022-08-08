@@ -2,10 +2,12 @@
 
 const choferes = JSON.parse(localStorage.getItem("choferes")) ?? [];
 
+let cantConsultasPuente = localStorage.getItem ("cantConsultasPuente");
+let cantConsultasTalar = localStorage.getItem ("cantConsultasTalar");
+
+// Con un if consulto si ya existe el array "choferes". Si no existe, lo creo.
 
 if (choferes.length == 0){
-
-    
     class Chofer {
         constructor(apellido, nombre, legajo, turno, coche, cabecera, consulta){
             this.apellido = apellido;
@@ -15,11 +17,8 @@ if (choferes.length == 0){
             this.coche = coche;
             this.cabecera = cabecera;
             this.consulta = 0;
-            
         }
     }
-    
-    
 choferes.push(new Chofer("Alfonso", "Franco Roberto", "3100", "Mañana","1", "Puente Uriburu"));
 choferes.push(new Chofer("Jimenez", "Leonardo Ezequiel", "2738", "Mañana","2", "Puente Uriburu"));
 choferes.push(new Chofer("Soto", "Ariel Abel", "2939", "Mañana","3", "Puente Uriburu"));
@@ -60,21 +59,7 @@ choferes.push(new Chofer("Strefechi", "Ivan Alejandro", "3036", "Mañana","47", 
 choferes.push(new Chofer("Albarracín", "Hernán Diego", "2685", "Tarde","47", "Talar"));
 choferes.push(new Chofer("Nuñez", "Luis Omar", "2822", "Mañana","49", "Talar"));
 choferes.push(new Chofer("Avendaño", "Marcos César", "2592", "Tarde","49", "Talar"));
-
 }
-
-
-//const enviarConsultasPorLegajo = [];
-
-
-
-//console.log(consultasPorLegajo[2]);
-
-
-
-
-
-//creo base de datos de turnos 
 
 const turnos = [];
 
@@ -89,7 +74,6 @@ turnos.push(["8", "03:13", "13:57"]);
 turnos.push(["9", "03:27", "13:29"]);
 turnos.push(["11", "03:37", "13:39"]);
 
-
 const talarTurnos = [];
 
 talarTurnos.push(["3", "04:06", "11:25"]);
@@ -102,7 +86,6 @@ talarTurnos.push(["15", "05:26", "14:50"]);
 talarTurnos.push(["16", "05:30", "13:13"]);
 talarTurnos.push(["17", "05:32", "12:45"]);
 talarTurnos.push(["18", "05:35", "12:57"]);
-
 
 const cantidadDeCoches = ["1","2","3","4","5","7","8","10","11","12"];
 let modeloCit = [];
@@ -157,9 +140,7 @@ for (i=0; i<4; i++){
     citSemana[i + 1] = x;
     }
 
-
-
-for (i=0; i<4; i++){
+    for (i=0; i<4; i++){
     let y = talarCitSemana[0].at(i);
     let x =  talarCitSemana[i].map((n) => n);
     x.shift();
@@ -167,11 +148,15 @@ for (i=0; i<4; i++){
     talarCitSemana[i + 1] = x;
 }
 
+// Agrego al array turnos los coches que están citados para cada uno, de lunes a viernes
+
 for (i=0;i<citSemana.length;i++){
     for (p=0;p<citSemana[i].length;p++){
     turnos[p].push(citSemana[i].at(p));
     }
 }
+
+//utilizo un for of para rellenar la información de los coches citados por cada cabecera.
 for (const item of turnos){
     for (i=0; i<turnos[i].length; i++){
         let llenar = document.getElementById("citacionPuente");
@@ -199,31 +184,24 @@ for (const item of talarTurnos){
     }
 }
 
-
-let getLegajo;
-
-let cantConsultasPuente = localStorage.getItem ("cantConsultasPuente");
-let cantConsultasTalar = localStorage.getItem ("cantConsultasTalar");
-
-
 let mostrarPuente = document.getElementById("citacionPuenteLink");
 let mostrarTalar = document.getElementById("citacionTalarLink");
 
-    mostrarPuente.addEventListener("click", mostrar);
-    function mostrar (){
-        document.getElementById("citacionPuente").style.visibility = "visible";
-        document.getElementById("citacionTalar").style.visibility = "hidden";
-        cantConsultasPuente++;
-        localStorage.setItem ("cantConsultasPuente", cantConsultasPuente);
-        
-    }
-    mostrarTalar.addEventListener("click", mostrar2);
-    function mostrar2 (){
-        document.getElementById("citacionPuente").style.visibility = "hidden";
-        document.getElementById("citacionTalar").style.visibility = "visible";
-        cantConsultasTalar++;
-        localStorage.setItem ("cantConsultasTalar", cantConsultasTalar);
-    }
+mostrarPuente.addEventListener("click", mostrar);
+function mostrar (){
+    document.getElementById("citacionPuente").style.visibility = "visible";
+    document.getElementById("citacionTalar").style.visibility = "hidden";
+    cantConsultasPuente++;
+    localStorage.setItem ("cantConsultasPuente", cantConsultasPuente);
+    
+}
+mostrarTalar.addEventListener("click", mostrar2);
+function mostrar2 (){
+    document.getElementById("citacionPuente").style.visibility = "hidden";
+    document.getElementById("citacionTalar").style.visibility = "visible";
+    cantConsultasTalar++;
+    localStorage.setItem ("cantConsultasTalar", cantConsultasTalar);
+}
 
 let mostrarLegajo = document.getElementById("inputButton");
 
@@ -233,6 +211,38 @@ let textModal = document.getElementById("infoChofer")
 
 let idChofer = document.getElementById("idChofer");
 
+let getLegajo;
+
+let pasarInfo;
+
+let infoEstadistica = document.getElementById("estadisticaButton");
+
+infoEstadistica.addEventListener("click", mostrar4);
+
+//Acomodo el array Choferes con un sort, para que me informe los legajos más consultados.
+
+function mostrar4(){
+    
+    choferes.sort((a , b)=>{
+        if (a.consulta < b.consulta){
+            return 1;
+        }
+        if (a.consulta > b.consulta){
+            return -1;
+        }
+        });
+
+        document.getElementById("infoEstadistica").innerHTML = `<h3>Consultas de Cabecera P. Uriburu: ${cantConsultasPuente??0}</h3><br>
+        <h3>Consultas de Cabecera Talar: ${cantConsultasTalar??0}</h3><br>
+        <h4>Legajos de choferes más consultados:</h4> <br>
+        <h5>${choferes[0].legajo} - ${choferes[0].apellido}: se consultó ${choferes[0].consulta} veces <br>
+        ${choferes[1].legajo} - ${choferes[1].apellido}: se consultó ${choferes[1].consulta} veces <br>
+        ${choferes[2].legajo} - ${choferes[2].apellido}: se consultó ${choferes[2].consulta} veces <br>
+        ${choferes[3].legajo} - ${choferes[3].apellido}: se consultó ${choferes[3].consulta} veces <br>
+        ${choferes[4].legajo} - ${choferes[4].apellido}: se consultó ${choferes[4].consulta} veces <br>
+        </h5> `; 
+    } 
+    
 mostrarLegajo.addEventListener("click", mostrar3);
 
 let getIn;
@@ -241,6 +251,7 @@ let getApellio;
 let getCoche;
 let horariosChofer = [];
 let getTurno;
+let infoChofer;
 let informeHorario;
 let welcome;
 let citChoferPorDia = [];
@@ -291,16 +302,11 @@ function mostrar3 (){
                 }
             }
         }
-            
-        
             infoChofer = `${getNombre} ${getApellido}`;
             informeHorario = `Sus citaciones para esta semana son:`;
-
-            
             
             idChofer.innerText = infoChofer;
             textModal.innerText = informeHorario;
-
             
             for (const item of citChoferPorDia){
                 let x = citChoferPorDia.indexOf(item);
