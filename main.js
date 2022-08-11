@@ -1,9 +1,12 @@
 //creo base de datos de choferes
 
+// utilizo un operador ??
+
 const choferes = JSON.parse(localStorage.getItem("choferes")) ?? [];
 
-let cantConsultasPuente = localStorage.getItem ("cantConsultasPuente");
-let cantConsultasTalar = localStorage.getItem ("cantConsultasTalar");
+let cantConsultasPuente = JSON.parse(localStorage.getItem ("cantConsultasPuente"))??0;
+let cantConsultasTalar = JSON.parse(localStorage.getItem ("cantConsultasTalar"))??0;
+
 
 // Con un if consulto si ya existe el array "choferes". Si no existe, lo creo.
 
@@ -97,67 +100,137 @@ talarModeloCit[0] = talarCantidadDeCoches;
 
 //Creo un array con modelos de citaciones posibles
 
-for (i=0; i<cantidadDeCoches.length-1; i++){
-    let y = cantidadDeCoches.at(i);
-    let x =  modeloCit[i].map((n) => n);
+
+function GenerarCitaciones (a, b){
+for (i=0; i<a.length-1; i++){
+    let y = a.at(i);
+    let x =  b[i].map((n) => n);
     x.shift();
     x.push(y);
-    modeloCit[i + 1] = x;
+    b[i + 1] = x;
 }
-for (i=0; i<talarCantidadDeCoches.length-1; i++){
-    let y = talarCantidadDeCoches.at(i);
-    let x =  talarModeloCit[i].map((n) => n);
-    x.shift();
-    x.push(y);
-    talarModeloCit[i + 1] = x;
 }
+GenerarCitaciones (cantidadDeCoches, modeloCit);
+GenerarCitaciones (talarCantidadDeCoches, talarModeloCit);
 
 //elijo al azar el primer coche para el lunes
-
-getIndice = Math.floor ((Math.random() * 10));
-talarGetIndice = Math.floor ((Math.random() * 10));
-
-getPrimero = cantidadDeCoches[getIndice];
-
-talarGetPrimero = talarCantidadDeCoches[talarGetIndice];
 
 const citSemana= [];
 const talarCitSemana= [];
 
-const diaLunes = modeloCit.findIndex((el) => el.at(0) == getPrimero);
-const talarDiaLunes = talarModeloCit.findIndex((el) => el.at(0) == talarGetPrimero);
-
-citSemana[0]= modeloCit[diaLunes];
-talarCitSemana[0]= talarModeloCit[talarDiaLunes];
-
-//creo otro array con las citaciones ordenadas segun primer coche del lunes
-
-for (i=0; i<4; i++){
-    let y = citSemana[0].at(i);
-    let x = citSemana[i].map((n) => n);
-    x.shift();
-    x.push(y);
-    citSemana[i + 1] = x;
-    }
-
+function GenerarPrimerCoche (a,b,c){
+    let getIndice = Math.floor ((Math.random() * 10));
+    let getPrimero = a[getIndice];
+    const diaLunes = b.findIndex((el) => el.at(0) == getPrimero);
+    c[0]= b[diaLunes];
     for (i=0; i<4; i++){
-    let y = talarCitSemana[0].at(i);
-    let x =  talarCitSemana[i].map((n) => n);
-    x.shift();
-    x.push(y);
-    talarCitSemana[i + 1] = x;
+        let y = c[0].at(i);
+        let x = c[i].map((n) => n);
+        x.shift();
+        x.push(y);
+        c[i + 1] = x;
+        }
 }
+
+GenerarPrimerCoche (cantidadDeCoches, modeloCit, citSemana);
+GenerarPrimerCoche (talarCantidadDeCoches, talarModeloCit, talarCitSemana);
+
 
 // Agrego al array turnos los coches que están citados para cada uno, de lunes a viernes
 
-for (i=0;i<citSemana.length;i++){
+//console.log (citSemana);
+let turnosAsignados = [];
+let talarTurnosAsignados = [];
+
+let citacionPuente = document.getElementById("citacionPuente");
+let citacionTalar = document.getElementById("citacionTalar");
+
+//aplico un spread de un objeto, pero me parece un poco inutil ya que me asigna un numero a las propiedades sin nombre, y luego no las puedo desestructurar, por lo que tuve que agregarles manualmente nombre de propiedad y valor.
+
+function GenerarCitacionSemana (a, b, c){
+    for (i=0;i<a.length;i++){
+        for (p=0;p<a[i].length;p++){
+            c[p] = {
+                ...b[p],
+                numeroDeTurno: b[p].at(0),
+                citacionTM: b[p].at(1),
+                citacionTT: b[p].at(2),
+                cocheLunes: a[0].at(p),
+                cocheMartes: a[1].at(p),
+                cocheMiercoles: a[2].at(p),
+                cocheJueves: a[3].at(p),
+                cocheViernes: a[4].at(p)
+            }
+        }
+}
+}
+GenerarCitacionSemana(citSemana, turnos, turnosAsignados);
+GenerarCitacionSemana(talarCitSemana, talarTurnos, talarTurnosAsignados);
+
+function RellenarCitacion (a,b){
+    
+//aplico una destructuración de un objeto para cumplir con el desafio, pero me resulta mucho más simple utilizar el indice en un for.
+
+    for (const item of a){
+        let {numeroDeTurno, citacionTM, citacionTT, cocheLunes, cocheMartes, cocheMiercoles, cocheJueves, cocheViernes} = item; 
+        
+            let llenar = b;
+            const node = document.createElement("div");
+            const textnode = document.createTextNode(numeroDeTurno);
+            node.classList.add('styleDiv');
+            node.appendChild(textnode);
+            llenar.appendChild(node);
+            const node1 = document.createElement("div");
+            const textnode1 = document.createTextNode(citacionTM);
+            node1.classList.add('styleDiv');
+            node1.appendChild(textnode1);
+            llenar.appendChild(node1);
+            const node2 = document.createElement("div");
+            const textnode2 = document.createTextNode(citacionTT);
+            node2.classList.add('styleDiv');
+            node2.appendChild(textnode2);
+            llenar.appendChild(node2);
+            const node3 = document.createElement("div");
+            const textnode3 = document.createTextNode(cocheLunes);
+            node3.classList.add('styleDiv');
+            node3.appendChild(textnode3);
+            llenar.appendChild(node3);
+            const node4 = document.createElement("div");
+            const textnode4 = document.createTextNode(cocheMartes);
+            node4.classList.add('styleDiv');
+            node4.appendChild(textnode4);
+            llenar.appendChild(node4);
+            const node5 = document.createElement("div");
+            const textnode5 = document.createTextNode(cocheMiercoles);
+            node5.classList.add('styleDiv');
+            node5.appendChild(textnode5);
+            llenar.appendChild(node5);
+            const node6 = document.createElement("div");
+            const textnode6 = document.createTextNode(cocheJueves);
+            node6.classList.add('styleDiv');
+            node6.appendChild(textnode6);
+            llenar.appendChild(node6);
+            const node7 = document.createElement("div");
+            const textnode7 = document.createTextNode(cocheViernes);
+            node7.classList.add('styleDiv');
+            node7.appendChild(textnode7);
+            llenar.appendChild(node7);
+    }
+}
+RellenarCitacion (turnosAsignados, citacionPuente ); 
+RellenarCitacion (talarTurnosAsignados, citacionTalar ); 
+
+
+
+//dejo este bloque comentado porque pienso transformarlo en funcion y seguir utilizando el indice para acceder al array.
+
+/* for (i=0;i<citSemana.length;i++){
     for (p=0;p<citSemana[i].length;p++){
     turnos[p].push(citSemana[i].at(p));
     }
-}
+} */
 
-//utilizo un for of para rellenar la información de los coches citados por cada cabecera.
-for (const item of turnos){
+/* for (const item of turnos){
     for (i=0; i<turnos[i].length; i++){
         let llenar = document.getElementById("citacionPuente");
         const node = document.createElement("div");
@@ -182,26 +255,26 @@ for (const item of talarTurnos){
         node.classList.add('styleDiv');
         llenar.appendChild(node);
     }
-}
+} */
 
-let mostrarPuente = document.getElementById("citacionPuenteLink");
-let mostrarTalar = document.getElementById("citacionTalarLink");
 
-mostrarPuente.addEventListener("click", mostrar);
-function mostrar (){
-    document.getElementById("citacionPuente").style.visibility = "visible";
-    document.getElementById("citacionTalar").style.visibility = "hidden";
-    cantConsultasPuente++;
-    localStorage.setItem ("cantConsultasPuente", cantConsultasPuente);
-    
+function VerCitacion (a,b,c,d){
+    a.style.visibility = "visible";
+    b.style.visibility = "hidden";
+    c = JSON.parse(localStorage.getItem (d))??0;
+    c++;
+    localStorage.setItem (d, JSON.stringify (c));
 }
-mostrarTalar.addEventListener("click", mostrar2);
+document.getElementById("citacionPuenteLink").addEventListener("click", ()=> {VerCitacion(citacionPuente, citacionTalar, cantConsultasPuente, "cantConsultasPuente")});
+document.getElementById("citacionTalarLink").addEventListener("click", ()=> {VerCitacion(citacionTalar, citacionPuente, cantConsultasTalar, "cantConsultasTalar")});
+
+/* mostrarTalar.addEventListener("click", mostrar2);
 function mostrar2 (){
     document.getElementById("citacionPuente").style.visibility = "hidden";
     document.getElementById("citacionTalar").style.visibility = "visible";
     cantConsultasTalar++;
     localStorage.setItem ("cantConsultasTalar", cantConsultasTalar);
-}
+} */
 
 let mostrarLegajo = document.getElementById("inputButton");
 
@@ -217,11 +290,12 @@ let pasarInfo;
 
 let infoEstadistica = document.getElementById("estadisticaButton");
 
-infoEstadistica.addEventListener("click", mostrar4);
+infoEstadistica.addEventListener("click", VerEstadistica);
 
 //Acomodo el array Choferes con un sort, para que me informe los legajos más consultados.
 
-function mostrar4(){
+
+function VerEstadistica(){
     
     choferes.sort((a , b)=>{
         if (a.consulta < b.consulta){
@@ -232,15 +306,16 @@ function mostrar4(){
         }
         });
 
-        document.getElementById("infoEstadistica").innerHTML = `<h3>Consultas de Cabecera P. Uriburu: ${cantConsultasPuente??0}</h3><br>
-        <h3>Consultas de Cabecera Talar: ${cantConsultasTalar??0}</h3><br>
-        <h4>Legajos de choferes más consultados:</h4> <br>
-        <h5>${choferes[0].legajo} - ${choferes[0].apellido}: se consultó ${choferes[0].consulta} veces <br>
-        ${choferes[1].legajo} - ${choferes[1].apellido}: se consultó ${choferes[1].consulta} veces <br>
-        ${choferes[2].legajo} - ${choferes[2].apellido}: se consultó ${choferes[2].consulta} veces <br>
-        ${choferes[3].legajo} - ${choferes[3].apellido}: se consultó ${choferes[3].consulta} veces <br>
-        ${choferes[4].legajo} - ${choferes[4].apellido}: se consultó ${choferes[4].consulta} veces <br>
-        </h5> `; 
+    for (i=0;i<5;i++){
+        const estadisticaChofer = ({legajo, apellido, consulta}) => {
+            x = document.getElementsByClassName("estChofer");
+            x[i].innerHTML = `<h5>${legajo} - ${apellido}: se consultó ${consulta} veces <br><h5>`
+        } 
+        estadisticaChofer(choferes[i]);
+    }
+        document.getElementById("infoEstadistica").innerHTML = `<h3>Consultas de Cabecera P. Uriburu: ${JSON.parse(localStorage.getItem ("cantConsultasPuente"))??0}</h3><br>
+        <h3>Consultas de Cabecera Talar: ${JSON.parse(localStorage.getItem ("cantConsultasTalar"))??0}</h3><br>
+        <h4>Legajos de choferes más consultados:</h4> <br>`; 
     } 
     
 mostrarLegajo.addEventListener("click", mostrar3);
@@ -256,11 +331,6 @@ let informeHorario;
 let welcome;
 let citChoferPorDia = [];
 let llenar2;
-
-for (i=0;i<=4;i++){
-    citChoferPorDia[i] = "rowCit"+i;
-}
-
 
 function mostrar3 (){
     let inputLegajo = document.getElementById("inputLegajo").value;
