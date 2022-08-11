@@ -138,7 +138,6 @@ GenerarPrimerCoche (talarCantidadDeCoches, talarModeloCit, talarCitSemana);
 
 // Agrego al array turnos los coches que están citados para cada uno, de lunes a viernes
 
-//console.log (citSemana);
 let turnosAsignados = [];
 let talarTurnosAsignados = [];
 
@@ -162,14 +161,14 @@ function GenerarCitacionSemana (a, b, c){
                 cocheViernes: a[4].at(p)
             }
         }
-}
+    }
 }
 GenerarCitacionSemana(citSemana, turnos, turnosAsignados);
 GenerarCitacionSemana(talarCitSemana, talarTurnos, talarTurnosAsignados);
 
 function RellenarCitacion (a,b){
     
-//aplico una destructuración de un objeto para cumplir con el desafio, pero me resulta mucho más simple utilizar el indice en un for.
+//aplico una destructuración de un objeto para cumplir con el desafio
 
     for (const item of a){
         let {numeroDeTurno, citacionTM, citacionTT, cocheLunes, cocheMartes, cocheMiercoles, cocheJueves, cocheViernes} = item; 
@@ -220,44 +219,6 @@ function RellenarCitacion (a,b){
 RellenarCitacion (turnosAsignados, citacionPuente ); 
 RellenarCitacion (talarTurnosAsignados, citacionTalar ); 
 
-
-
-//dejo este bloque comentado porque pienso transformarlo en funcion y seguir utilizando el indice para acceder al array.
-
-/* for (i=0;i<citSemana.length;i++){
-    for (p=0;p<citSemana[i].length;p++){
-    turnos[p].push(citSemana[i].at(p));
-    }
-} */
-
-/* for (const item of turnos){
-    for (i=0; i<turnos[i].length; i++){
-        let llenar = document.getElementById("citacionPuente");
-        const node = document.createElement("div");
-        const textnode = document.createTextNode(item.at(i));
-        node.classList.add('styleDiv');
-        node.appendChild(textnode);
-        llenar.appendChild(node);
-    }
-}
-
-for (i=0;i<talarCitSemana.length;i++){
-    for (p=0;p<talarCitSemana[i].length;p++){
-    talarTurnos[p].push(talarCitSemana[i].at(p));
-    }
-}
-for (const item of talarTurnos){
-    for (i=0; i<talarTurnos[i].length; i++){
-        let llenar = document.getElementById("citacionTalar");
-        const node = document.createElement("div");
-        const textnode = document.createTextNode(item.at(i));
-        node.appendChild(textnode);
-        node.classList.add('styleDiv');
-        llenar.appendChild(node);
-    }
-} */
-
-
 function VerCitacion (a,b,c,d){
     a.style.visibility = "visible";
     b.style.visibility = "hidden";
@@ -268,26 +229,9 @@ function VerCitacion (a,b,c,d){
 document.getElementById("citacionPuenteLink").addEventListener("click", ()=> {VerCitacion(citacionPuente, citacionTalar, cantConsultasPuente, "cantConsultasPuente")});
 document.getElementById("citacionTalarLink").addEventListener("click", ()=> {VerCitacion(citacionTalar, citacionPuente, cantConsultasTalar, "cantConsultasTalar")});
 
-
-
-let mostrarLegajo = document.getElementById("inputButton");
-
-let inputLegajo = parseInt(document.getElementById("inputLegajo").value);
-
-let textModal = document.getElementById("infoChofer")
-
-let idChofer = document.getElementById("idChofer");
-
-let getLegajo;
-
-let pasarInfo;
-
-let infoEstadistica = document.getElementById("estadisticaButton");
-
-infoEstadistica.addEventListener("click", VerEstadistica);
+document.getElementById("estadisticaButton").addEventListener("click", VerEstadistica);
 
 //Acomodo el array Choferes con un sort, para que me informe los legajos más consultados.
-
 
 function VerEstadistica(){
     
@@ -312,75 +256,79 @@ function VerEstadistica(){
         <h4>Legajos de choferes más consultados:</h4> <br>`; 
     } 
     
-mostrarLegajo.addEventListener("click", mostrar3);
-
-let getIn;
-let getNombre;
-let getApellio;
-let getCoche;
-let horariosChofer = [];
-let getTurno;
-let infoChofer;
-let informeHorario;
-let welcome;
-let citChoferPorDia = [];
-let llenar2;
-
-function mostrar3 (){
-    let inputLegajo = document.getElementById("inputLegajo").value;
-    document.getElementById("citacionPorChofer").style.visibility = "visible";
-    if (choferes.some ((el) => el.legajo == inputLegajo) == true){
-        getIn = choferes.findIndex ((el) => el.legajo == inputLegajo);
-        getNombre = choferes[getIn].nombre;
-        getApellido = choferes[getIn].apellido;
-        getCoche = choferes[getIn].coche;
-        getCabecera = choferes[getIn].cabecera;
-        choferes[getIn].consulta++;
-        localStorage.setItem ("choferes", JSON.stringify (choferes));
-        
-
-        if (getCabecera=="Puente Uriburu"){
-        for (i=0; i<citSemana.length;i++){
+    document.getElementById("inputButton").addEventListener("click",()=> {MostrarCitChofer()});
     
-            getTurno = citSemana[i].findIndex ((el) => el == getCoche);
+    function MostrarCitChofer(){
+        let inputLegajo = document.getElementById("inputLegajo").value;
+        if (choferes.some ((el) => el.legajo == inputLegajo) == true){
+            document.getElementById("citacionPorChofer").style.visibility = "visible";
+            let getIn = choferes.findIndex ((el) => el.legajo == inputLegajo);
+            let {nombre, apellido, turno, coche, cabecera} = choferes[getIn];
+            let cab = (cabecera == "Puente Uriburu")?turnosAsignados:talarTurnosAsignados;
+            let cocheCitL = cab.findIndex ((el) => el.cocheLunes == coche);
+            let cocheCitM = cab.findIndex ((el) => el.cocheMartes == coche);
+            let cocheCitMM = cab.findIndex ((el) => el.cocheMiercoles == coche);
+            let cocheCitJ = cab.findIndex ((el) => el.cocheJueves == coche);
+            let cocheCitV = cab.findIndex ((el) => el.cocheViernes == coche);
+            let turnoCitL = (turno == "Mañana")?cab[cocheCitL].citacionTM:cab[cocheCitL].citacionTT;
+            let turnoCitM = (turno == "Mañana")?cab[cocheCitM].citacionTM:cab[cocheCitM].citacionTT;
+            let turnoCitMM = (turno == "Mañana")?cab[cocheCitMM].citacionTM:cab[cocheCitMM].citacionTT;
+            let turnoCitJ = (turno == "Mañana")?cab[cocheCitJ].citacionTM:cab[cocheCitJ].citacionTT;
+            let turnoCitV = (turno == "Mañana")?cab[cocheCitV].citacionTM:cab[cocheCitV].citacionTT;
+            choferes[getIn].consulta++;
+            localStorage.setItem ("choferes", JSON.stringify (choferes));
             
-            if (choferes[getIn].turno == "Mañana"){
-                let hora = turnos[getTurno].at(1);
-                horariosChofer[i] = hora;
-            } else{
-                let hora = turnos[getTurno].at(2);
-                horariosChofer[i] = hora;
-            }
-        }
-        }else if(getCabecera=="Talar"){
-            for (i=0; i<talarCitSemana.length;i++){
-    
-                getTurno = talarCitSemana[i].findIndex ((el) => el == getCoche);
-                
-                if (choferes[getIn].turno == "Mañana"){
-                    let hora = talarTurnos[getTurno].at(1);
-                    horariosChofer[i] = hora;
-                } else{
-                    let hora = talarTurnos[getTurno].at(2);
-                    horariosChofer[i] = hora;
-                }
-            }
-        }
-            infoChofer = `${getNombre} ${getApellido}`;
-            informeHorario = `Sus citaciones para esta semana son:`;
+            let infoChofer = `${nombre} ${apellido}`;
+            let informeHorario = `Sus citaciones para esta semana son:`;
             
-            idChofer.innerText = infoChofer;
-            textModal.innerText = informeHorario;
-            
-            for (i=0;i<5;i++){
-                let x = document.getElementsByClassName("rowCit");
-                x[i].innerText = horariosChofer[i];
-                
-            }  
+            document.getElementById("idChofer").innerText = infoChofer;
+            document.getElementById("infoChofer").innerText = informeHorario;
+
+            let index = document.getElementsByClassName("rowCit");
+            index[0].innerText = turnoCitL;
+            index[1].innerText = turnoCitM;
+            index[2].innerText = turnoCitMM;
+            index[3].innerText = turnoCitJ;
+            index[4].innerText = turnoCitV;
         } else {
             document.getElementById("citacionPorChofer").style.visibility = "hidden";
             idChofer.innerText = "";
-            textModal.innerHTML = "<h3>El legajo que ingresó no se encuentra en nuestra base de datos.<br><br>Intente nuevamente.</h3>";
+            document.getElementById("infoChofer").innerHTML = "<h3>El legajo que ingresó no se encuentra en nuestra base de datos.<br><br>Intente nuevamente.</h3>";
 
         }
-} 
+    }
+    
+document.getElementById("resetBtn").addEventListener("click", Validar);
+
+function Validar(){
+
+    swal({
+        title: "Estás seguro?",
+        text: "Borrarás toda la estadística",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((confirm) => {
+        if (confirm) {
+            ResetEstadistica();
+        } 
+    });
+}
+
+function ResetEstadistica(){
+    
+    for (const elem of choferes){
+        elem.consulta = "0";
+    }
+    localStorage.setItem ("choferes", JSON.stringify (choferes));
+
+    cantConsultasPuente = "0";
+    cantConsultasTalar = "0";
+    localStorage.setItem ("cantConsultasPuente", JSON.stringify (cantConsultasPuente));
+    localStorage.setItem ("cantConsultasTalar", JSON.stringify (cantConsultasTalar));
+    VerEstadistica();
+    swal({
+        icon: "success",
+        title: "Estadística borrada",
+    });
+}

@@ -63,6 +63,14 @@ table tbody tr th{
     background-color: white;
     color: black;
 }
+#closeBtn1{
+    background-color: white;
+    color: black;
+}
+#resetBtn{
+    background-color: white;
+    color: black;
+}
 #idChofer, #exampleModalLabel{
     font-style: oblique;
     color: white;
