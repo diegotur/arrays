@@ -268,13 +268,7 @@ function VerCitacion (a,b,c,d){
 document.getElementById("citacionPuenteLink").addEventListener("click", ()=> {VerCitacion(citacionPuente, citacionTalar, cantConsultasPuente, "cantConsultasPuente")});
 document.getElementById("citacionTalarLink").addEventListener("click", ()=> {VerCitacion(citacionTalar, citacionPuente, cantConsultasTalar, "cantConsultasTalar")});
 
-/* mostrarTalar.addEventListener("click", mostrar2);
-function mostrar2 (){
-    document.getElementById("citacionPuente").style.visibility = "hidden";
-    document.getElementById("citacionTalar").style.visibility = "visible";
-    cantConsultasTalar++;
-    localStorage.setItem ("cantConsultasTalar", cantConsultasTalar);
-} */
+
 
 let mostrarLegajo = document.getElementById("inputButton");
 
@@ -378,9 +372,9 @@ function mostrar3 (){
             idChofer.innerText = infoChofer;
             textModal.innerText = informeHorario;
             
-            for (const item of citChoferPorDia){
-                let x = citChoferPorDia.indexOf(item);
-                document.getElementById(item).innerText = horariosChofer[x];
+            for (i=0;i<5;i++){
+                let x = document.getElementsByClassName("rowCit");
+                x[i].innerText = horariosChofer[i];
                 
             }  
         } else {
