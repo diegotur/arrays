@@ -77,7 +77,7 @@ turnos.push(["8", "03:13", "13:57"]);
 turnos.push(["9", "03:27", "13:29"]);
 turnos.push(["11", "03:37", "13:39"]);
 
-const talarTurnos = [];
+/* const talarTurnos = [];
 
 talarTurnos.push(["3", "04:06", "11:25"]);
 talarTurnos.push(["5", "04:22", "11:51"]);
@@ -88,7 +88,7 @@ talarTurnos.push(["13", "05:18", "13:55"]);
 talarTurnos.push(["15", "05:26", "14:50"]);
 talarTurnos.push(["16", "05:30", "13:13"]);
 talarTurnos.push(["17", "05:32", "12:45"]);
-talarTurnos.push(["18", "05:35", "12:57"]);
+talarTurnos.push(["18", "05:35", "12:57"]); */
 
 const cantidadDeCoches = ["1","2","3","4","5","7","8","10","11","12"];
 let modeloCit = [];
@@ -147,13 +147,17 @@ let citacionTalar = document.getElementById("citacionTalar");
 //aplico un spread de un objeto, pero me parece un poco inutil ya que me asigna un numero a las propiedades sin nombre, y luego no las puedo desestructurar, por lo que tuve que agregarles manualmente nombre de propiedad y valor.
 
 function GenerarCitacionSemana (a, b, c){
+    fetch(b)
+    .then(response => response.json())
+    .then(j =>{
+        
     for (i=0;i<a.length;i++){
         for (p=0;p<a[i].length;p++){
             c[p] = {
-                ...b[p],
-                numeroDeTurno: b[p].at(0),
-                citacionTM: b[p].at(1),
-                citacionTT: b[p].at(2),
+                //...b[p],
+                numeroDeTurno: j[p].numeroDeTurno,
+                citacionTM: j[p].citacionTM,
+                citacionTT: j[p].citacionTT,
                 cocheLunes: a[0].at(p),
                 cocheMartes: a[1].at(p),
                 cocheMiercoles: a[2].at(p),
@@ -162,9 +166,13 @@ function GenerarCitacionSemana (a, b, c){
             }
         }
     }
+})
 }
-GenerarCitacionSemana(citSemana, turnos, turnosAsignados);
-GenerarCitacionSemana(talarCitSemana, talarTurnos, talarTurnosAsignados);
+
+//GenerarCitacionSemana(citSemana, turnos, turnosAsignados);
+GenerarCitacionSemana(talarCitSemana, "talarTurnos.json", talarTurnosAsignados);
+
+console.log (talarTurnosAsignados);
 
 function RellenarCitacion (a,b){
     
