@@ -121,6 +121,10 @@ table tbody tr th{
     padding-bottom: 15%;
     border-color: black;
 }
+#staticBackdrop{
+    margin-top: 15vh;
+}
+
 
 @media screen and (max-width:768px) {
     .nav-link{
@@ -156,5 +160,12 @@ table tbody tr th{
     #idChofer{
         font-size: 160%;
         text-align: center!important;
+    }
+    #estadisticaButton{
+        font-size: 4.5vw;
+        padding: 0;
+        display: flex;
+        justify-items: start;
+        /* margin-left: -72vh; */
     }
 }
