@@ -1,0 +1,12 @@
+[
+    {"numeroDeTurno": "1", "citacionTM":"00:20", "citacionTT":"12:34"},
+    {"numeroDeTurno": "2", "citacionTM":"00:54", "citacionTT":"12:53"},
+    {"numeroDeTurno": "3", "citacionTM":"01:33", "citacionTT":"13:00"},
+    {"numeroDeTurno": "4", "citacionTM":"02:07", "citacionTT":"13:20"},
+    {"numeroDeTurno": "5", "citacionTM":"02:39", "citacionTT":"13:25"},
+    {"numeroDeTurno": "6", "citacionTM":"02:48", "citacionTT":"13:26"},
+    {"numeroDeTurno": "7", "citacionTM":"02:57", "citacionTT":"14:25"},
+    {"numeroDeTurno": "8", "citacionTM":"03:13", "citacionTT":"13:57"},
+    {"numeroDeTurno": "9", "citacionTM":"03:27", "citacionTT":"13:29"},
+    {"numeroDeTurno": "11", "citacionTM":"03:37", "citacionTT":"13:39"}
+]

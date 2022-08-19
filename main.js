@@ -65,30 +65,8 @@ choferes.push(new Chofer("Avendaño", "Marcos César", "2592", "Tarde","49", "Ta
 }
 
 const turnos = [];
+const talarTurnos = [];
 
-turnos.push(["1", "00:20", "12:34"]);
-turnos.push(["2", "00:54", "12:53"]);
-turnos.push(["3", "01:33", "13:00"]);
-turnos.push(["4", "02:07", "13:20"]);
-turnos.push(["5", "02:39", "13:25"]);
-turnos.push(["6", "02:48", "13:26"]);
-turnos.push(["7", "02:57", "14:25"]);
-turnos.push(["8", "03:13", "13:57"]);
-turnos.push(["9", "03:27", "13:29"]);
-turnos.push(["11", "03:37", "13:39"]);
-
-/* const talarTurnos = [];
-
-talarTurnos.push(["3", "04:06", "11:25"]);
-talarTurnos.push(["5", "04:22", "11:51"]);
-talarTurnos.push(["8", "04:48", "12:28"]);
-talarTurnos.push(["9", "04:52", "12:49"]);
-talarTurnos.push(["12", "05:15", "13:25"]);
-talarTurnos.push(["13", "05:18", "13:55"]);
-talarTurnos.push(["15", "05:26", "14:50"]);
-talarTurnos.push(["16", "05:30", "13:13"]);
-talarTurnos.push(["17", "05:32", "12:45"]);
-talarTurnos.push(["18", "05:35", "12:57"]); */
 
 const cantidadDeCoches = ["1","2","3","4","5","7","8","10","11","12"];
 let modeloCit = [];
@@ -144,88 +122,77 @@ let talarTurnosAsignados = [];
 let citacionPuente = document.getElementById("citacionPuente");
 let citacionTalar = document.getElementById("citacionTalar");
 
-//aplico un spread de un objeto, pero me parece un poco inutil ya que me asigna un numero a las propiedades sin nombre, y luego no las puedo desestructurar, por lo que tuve que agregarles manualmente nombre de propiedad y valor.
-
-function GenerarCitacionSemana (a, b, c){
-    fetch(b)
+async function GenerarCitacionSemana (a, b, c, d){
+    await fetch(b)
     .then(response => response.json())
     .then(j =>{
-        
+    
     for (i=0;i<a.length;i++){
         for (p=0;p<a[i].length;p++){
             c[p] = {
-                //...b[p],
-                numeroDeTurno: j[p].numeroDeTurno,
-                citacionTM: j[p].citacionTM,
-                citacionTT: j[p].citacionTT,
+                ...j[p],
                 cocheLunes: a[0].at(p),
                 cocheMartes: a[1].at(p),
                 cocheMiercoles: a[2].at(p),
                 cocheJueves: a[3].at(p),
                 cocheViernes: a[4].at(p)
-            }
         }
-    }
+     } 
+}
 })
-}
 
-//GenerarCitacionSemana(citSemana, turnos, turnosAsignados);
-GenerarCitacionSemana(talarCitSemana, "talarTurnos.json", talarTurnosAsignados);
-
-console.log (talarTurnosAsignados);
-
-function RellenarCitacion (a,b){
+for (const item of c){
+    let {numeroDeTurno, citacionTM, citacionTT, cocheLunes, cocheMartes, cocheMiercoles, cocheJueves, cocheViernes} = item; 
     
-//aplico una destructuración de un objeto para cumplir con el desafio
-
-    for (const item of a){
-        let {numeroDeTurno, citacionTM, citacionTT, cocheLunes, cocheMartes, cocheMiercoles, cocheJueves, cocheViernes} = item; 
-        
-            let llenar = b;
-            const node = document.createElement("div");
-            const textnode = document.createTextNode(numeroDeTurno);
-            node.classList.add('styleDiv');
-            node.appendChild(textnode);
-            llenar.appendChild(node);
-            const node1 = document.createElement("div");
-            const textnode1 = document.createTextNode(citacionTM);
-            node1.classList.add('styleDiv');
-            node1.appendChild(textnode1);
-            llenar.appendChild(node1);
-            const node2 = document.createElement("div");
-            const textnode2 = document.createTextNode(citacionTT);
-            node2.classList.add('styleDiv');
-            node2.appendChild(textnode2);
-            llenar.appendChild(node2);
-            const node3 = document.createElement("div");
-            const textnode3 = document.createTextNode(cocheLunes);
-            node3.classList.add('styleDiv');
-            node3.appendChild(textnode3);
-            llenar.appendChild(node3);
-            const node4 = document.createElement("div");
-            const textnode4 = document.createTextNode(cocheMartes);
-            node4.classList.add('styleDiv');
-            node4.appendChild(textnode4);
-            llenar.appendChild(node4);
-            const node5 = document.createElement("div");
-            const textnode5 = document.createTextNode(cocheMiercoles);
-            node5.classList.add('styleDiv');
-            node5.appendChild(textnode5);
-            llenar.appendChild(node5);
-            const node6 = document.createElement("div");
-            const textnode6 = document.createTextNode(cocheJueves);
-            node6.classList.add('styleDiv');
-            node6.appendChild(textnode6);
-            llenar.appendChild(node6);
-            const node7 = document.createElement("div");
-            const textnode7 = document.createTextNode(cocheViernes);
-            node7.classList.add('styleDiv');
-            node7.appendChild(textnode7);
-            llenar.appendChild(node7);
-    }
+        let llenar = d;
+        const node = document.createElement("div");
+        const textnode = document.createTextNode(numeroDeTurno);
+        node.classList.add('styleDiv');
+        node.appendChild(textnode);
+        llenar.appendChild(node);
+        const node1 = document.createElement("div");
+        const textnode1 = document.createTextNode(citacionTM);
+        node1.classList.add('styleDiv');
+        node1.appendChild(textnode1);
+        llenar.appendChild(node1);
+        const node2 = document.createElement("div");
+        const textnode2 = document.createTextNode(citacionTT);
+        node2.classList.add('styleDiv');
+        node2.appendChild(textnode2);
+        llenar.appendChild(node2);
+        const node3 = document.createElement("div");
+        const textnode3 = document.createTextNode(cocheLunes);
+        node3.classList.add('styleDiv');
+        node3.appendChild(textnode3);
+        llenar.appendChild(node3);
+        const node4 = document.createElement("div");
+        const textnode4 = document.createTextNode(cocheMartes);
+        node4.classList.add('styleDiv');
+        node4.appendChild(textnode4);
+        llenar.appendChild(node4);
+        const node5 = document.createElement("div");
+        const textnode5 = document.createTextNode(cocheMiercoles);
+        node5.classList.add('styleDiv');
+        node5.appendChild(textnode5);
+        llenar.appendChild(node5);
+        const node6 = document.createElement("div");
+        const textnode6 = document.createTextNode(cocheJueves);
+        node6.classList.add('styleDiv');
+        node6.appendChild(textnode6);
+        llenar.appendChild(node6);
+        const node7 = document.createElement("div");
+        const textnode7 = document.createTextNode(cocheViernes);
+        node7.classList.add('styleDiv');
+        node7.appendChild(textnode7);
+        llenar.appendChild(node7);
 }
-RellenarCitacion (turnosAsignados, citacionPuente ); 
-RellenarCitacion (talarTurnosAsignados, citacionTalar ); 
+} 
+
+GenerarCitacionSemana(citSemana, "turnos.json", turnosAsignados, citacionPuente);
+GenerarCitacionSemana(talarCitSemana, "talarTurnos.json", talarTurnosAsignados, citacionTalar);
+
+
+
 
 function VerCitacion (a,b,c,d){
     a.style.visibility = "visible";
