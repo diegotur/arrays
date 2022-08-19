@@ -1,6 +1,3 @@
-//creo base de datos de choferes
-
-// utilizo un operador ??
 
 const choferes = JSON.parse(localStorage.getItem("choferes")) ?? [];
 
@@ -8,71 +5,29 @@ let cantConsultasPuente = JSON.parse(localStorage.getItem ("cantConsultasPuente"
 let cantConsultasTalar = JSON.parse(localStorage.getItem ("cantConsultasTalar"))??0;
 
 
-// Con un if consulto si ya existe el array "choferes". Si no existe, lo creo.
 
 if (choferes.length == 0){
-    class Chofer {
-        constructor(apellido, nombre, legajo, turno, coche, cabecera, consulta){
-            this.apellido = apellido;
-            this.nombre = nombre;
-            this.legajo = legajo;
-            this.turno = turno;
-            this.coche = coche;
-            this.cabecera = cabecera;
-            this.consulta = 0;
-        }
-    }
-choferes.push(new Chofer("Alfonso", "Franco Roberto", "3100", "Mañana","1", "Puente Uriburu"));
-choferes.push(new Chofer("Jimenez", "Leonardo Ezequiel", "2738", "Mañana","2", "Puente Uriburu"));
-choferes.push(new Chofer("Soto", "Ariel Abel", "2939", "Mañana","3", "Puente Uriburu"));
-choferes.push(new Chofer("Pared", "Ricardo Fabián", "2936", "Mañana","4", "Puente Uriburu"));
-choferes.push(new Chofer("Guibondot", "Hernán Antonio", "2749", "Mañana","5", "Puente Uriburu"));
-choferes.push(new Chofer("Torrez", "Kevin Luis", "3082", "Tarde","1", "Puente Uriburu"));
-choferes.push(new Chofer("Barboza", "Axel Walter", "3005", "Tarde","2", "Puente Uriburu"));
-choferes.push(new Chofer("Lopez Montecino", "Víctor", "2364", "Tarde","3", "Puente Uriburu"));
-choferes.push(new Chofer("Orue", "Salvador Ángel", "2498", "Tarde","4", "Puente Uriburu"));
-choferes.push(new Chofer("Rodriguez Carbajal", "Johnny", "2072", "Tarde","5", "Puente Uriburu"));
-choferes.push(new Chofer("Villalba", "Diego Alejandro", "2774", "Mañana","7", "Puente Uriburu"));
-choferes.push(new Chofer("Lopez", "Nicolás Martín", "3058", "Tarde","7", "Puente Uriburu"));
-choferes.push(new Chofer("Quijano", "Jorge Alejandro", "2449", "Mañana","8", "Puente Uriburu"));
-choferes.push(new Chofer("Santomé", "Néstor Oscar", "2786", "Tarde","8", "Puente Uriburu"));
-choferes.push(new Chofer("Lopez", "Christian Antonio", "2801", "Mañana","10", "Puente Uriburu"));
-choferes.push(new Chofer("Ramirez", "Sergio Eliseo", "3095", "Tarde","10", "Puente Uriburu"));
-choferes.push(new Chofer("Maidana", "Juan Alberto", "2437", "Mañana","11", "Puente Uriburu"));
-choferes.push(new Chofer("Roqueiro", "Walter Darío", "2689", "Tarde","11", "Puente Uriburu"));
-choferes.push(new Chofer("Flores", "Victoriano", "2065", "Mañana","12", "Puente Uriburu"));
-choferes.push(new Chofer("Borda", "Héctor Eduardo", "2802", "Tarde","12", "Puente Uriburu"));
-choferes.push(new Chofer("Ferreyra", "Hugo Ariel", "3006", "Mañana","6", "Talar"));
-choferes.push(new Chofer("Velichco", "Miguel Ángel", "2902", "Tarde","6", "Talar"));
-choferes.push(new Chofer("Ojeda", "Juan Pablo", "2706", "Mañana","9", "Talar"));
-choferes.push(new Chofer("Andino", "Mario Sebastián", "2875", "Tarde","9", "Talar"));
-choferes.push(new Chofer("Mosse", "Federico Matías", "2980", "Mañana","16", "Talar"));
-choferes.push(new Chofer("Dragomir", "Ernesto Fidel", "2624", "Tarde","16", "Talar"));
-choferes.push(new Chofer("Ledesma", "Jesús Feliciano", "2733", "Mañana","32", "Talar"));
-choferes.push(new Chofer("Benitez", "Carlos Matías", "2815", "Tarde","32", "Talar"));
-choferes.push(new Chofer("Gauna", "Gustavo Andrés", "2788", "Mañana","33", "Talar"));
-choferes.push(new Chofer("Sanchez", "Alfredo José", "2512", "Tarde","33", "Talar"));
-choferes.push(new Chofer("Idalgo", "Claudio Norberto", "2898", "Mañana","36", "Talar"));
-choferes.push(new Chofer("García", "Ezequiel", "3016", "Tarde","36", "Talar"));
-choferes.push(new Chofer("Paez", "Cristian Edgardo Nicolás", "3046", "Mañana","38", "Talar"));
-choferes.push(new Chofer("Rodriguez", "Miguel Eduardo", "2526", "Tarde","38", "Talar"));
-choferes.push(new Chofer("Romero", "Enrique Daniel", "2649", "Mañana","39", "Talar"));
-choferes.push(new Chofer("Ruiz", "Adolfo Martín", "2825", "Tarde","39", "Talar"));
-choferes.push(new Chofer("Strefechi", "Ivan Alejandro", "3036", "Mañana","47", "Talar"));
-choferes.push(new Chofer("Albarracín", "Hernán Diego", "2685", "Tarde","47", "Talar"));
-choferes.push(new Chofer("Nuñez", "Luis Omar", "2822", "Mañana","49", "Talar"));
-choferes.push(new Chofer("Avendaño", "Marcos César", "2592", "Tarde","49", "Talar"));
+    fetch("choferes.json")
+    .then(response => response.json())
+    .then(j =>{
+    
+    for (i=0;i<j.length;i++){
+        choferes[i]=j[i];
+        
 }
-
+})
+}
+console.log(choferes);
+    
 const turnos = [];
 const talarTurnos = [];
 
 
-const cantidadDeCoches = ["1","2","3","4","5","7","8","10","11","12"];
+const cantidadDeCoches = ["1","2","3","4","5","7","8","10","11","12","14"];
 let modeloCit = [];
 modeloCit[0] = cantidadDeCoches;
 
-const talarCantidadDeCoches = ["6","9","16","32","33","36","38","39","47","49" ];
+const talarCantidadDeCoches = ["6","9","16","32","33","36","38","39","47","49","57"];
 let talarModeloCit = [];
 talarModeloCit[0] = talarCantidadDeCoches;
 
@@ -90,8 +45,6 @@ for (i=0; i<a.length-1; i++){
 }
 GenerarCitaciones (cantidadDeCoches, modeloCit);
 GenerarCitaciones (talarCantidadDeCoches, talarModeloCit);
-
-//elijo al azar el primer coche para el lunes
 
 const citSemana= [];
 const talarCitSemana= [];
@@ -112,9 +65,6 @@ function GenerarPrimerCoche (a,b,c){
 
 GenerarPrimerCoche (cantidadDeCoches, modeloCit, citSemana);
 GenerarPrimerCoche (talarCantidadDeCoches, talarModeloCit, talarCitSemana);
-
-
-// Agrego al array turnos los coches que están citados para cada uno, de lunes a viernes
 
 let turnosAsignados = [];
 let talarTurnosAsignados = [];
@@ -206,7 +156,6 @@ document.getElementById("citacionTalarLink").addEventListener("click", ()=> {Ver
 
 document.getElementById("estadisticaButton").addEventListener("click", VerEstadistica);
 
-//Acomodo el array Choferes con un sort, para que me informe los legajos más consultados.
 
 function VerEstadistica(){
     
