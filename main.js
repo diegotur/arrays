@@ -17,54 +17,66 @@ if (choferes.length == 0){
 }
 })
 }
-console.log(choferes);
     
 const turnos = [];
 const talarTurnos = [];
-
-
-const cantidadDeCoches = ["1","2","3","4","5","7","8","10","11","12","14"];
 let modeloCit = [];
-modeloCit[0] = cantidadDeCoches;
-
-const talarCantidadDeCoches = ["6","9","16","32","33","36","38","39","47","49","57"];
 let talarModeloCit = [];
-talarModeloCit[0] = talarCantidadDeCoches;
-
-//Creo un array con modelos de citaciones posibles
-
-
-function GenerarCitaciones (a, b){
-for (i=0; i<a.length-1; i++){
-    let y = a.at(i);
-    let x =  b[i].map((n) => n);
-    x.shift();
-    x.push(y);
-    b[i + 1] = x;
-}
-}
-GenerarCitaciones (cantidadDeCoches, modeloCit);
-GenerarCitaciones (talarCantidadDeCoches, talarModeloCit);
-
 const citSemana= [];
 const talarCitSemana= [];
 
-function GenerarPrimerCoche (a,b,c){
-    let getIndice = Math.floor ((Math.random() * 10));
-    let getPrimero = a[getIndice];
-    const diaLunes = b.findIndex((el) => el.at(0) == getPrimero);
-    c[0]= b[diaLunes];
-    for (i=0; i<4; i++){
-        let y = c[0].at(i);
-        let x = c[i].map((n) => n);
-        x.shift();
-        x.push(y);
-        c[i + 1] = x;
+
+
+async function GenerarCitaciones (a, b, c, d, e){
+    await fetch(a)
+    .then(response => response.json())
+    .then(j =>{
+        b[0]=j[0];
+        c[0]=j[1];
+
+        let pte = j[0];
+        let talar = j[1];
+        
+        for (i=0; i<pte.length-1; i++){
+            let y = pte.at(i);
+            let x =  b[i].map((n) => n);
+            x.shift();
+            x.push(y);
+            b[i + 1] = x;
         }
+        for (i=0; i<talar.length-1; i++){
+            let y = talar.at(i);
+            let x =  c[i].map((n) => n);
+            x.shift();
+            x.push(y);
+            c[i + 1] = x;
+        }
+        let getIndice = Math.floor ((Math.random() * 10));
+        let getPrimero = pte[getIndice];
+        let getPrimeroTalar = talar[getIndice];
+        const diaLunes = b.findIndex((el) => el.at(0) == getPrimero);
+        const diaLunesTalar = c.findIndex((el) => el.at(0) == getPrimeroTalar);
+        d[0]= b[diaLunes];
+        e[0]= c[diaLunesTalar];
+
+            for (i=0; i<4; i++){
+                let y = d[0].at(i);
+                let x = d[i].map((n) => n);
+                x.shift();
+                x.push(y);
+                d[i + 1] = x;
+                }
+            for (i=0; i<4; i++){
+                let y = e[0].at(i);
+                let x = e[i].map((n) => n);
+                x.shift();
+                x.push(y);
+                e[i + 1] = x;
+                }
+})
 }
 
-GenerarPrimerCoche (cantidadDeCoches, modeloCit, citSemana);
-GenerarPrimerCoche (talarCantidadDeCoches, talarModeloCit, talarCitSemana);
+GenerarCitaciones ("parque.json", modeloCit, talarModeloCit, citSemana, talarCitSemana); 
 
 let turnosAsignados = [];
 let talarTurnosAsignados = [];
@@ -86,9 +98,9 @@ async function GenerarCitacionSemana (a, b, c, d){
                 cocheMiercoles: a[2].at(p),
                 cocheJueves: a[3].at(p),
                 cocheViernes: a[4].at(p)
-        }
-     } 
-}
+            }
+        } 
+    }
 })
 
 for (const item of c){
