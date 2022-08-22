@@ -1,14 +1,14 @@
 [
-{"numeroDeTurno": 3, "citacionTM":"04:06", "citacionTT":"11:25"},
-{"numeroDeTurno": 5, "citacionTM":"04:22", "citacionTT":"11:51"},
-{"numeroDeTurno": 8, "citacionTM":"04:48", "citacionTT":"12:28"},
-{"numeroDeTurno": 9, "citacionTM":"04:52", "citacionTT":"12:49"},
-{"numeroDeTurno": 12, "citacionTM":"05:15", "citacionTT":"13:25"},
-{"numeroDeTurno": 13, "citacionTM":"05:18", "citacionTT":"13:55"},
-{"numeroDeTurno": 15, "citacionTM":"05:26", "citacionTT":"14:50"},
-{"numeroDeTurno": 16, "citacionTM":"05:30", "citacionTT":"13:13"},
-{"numeroDeTurno": 17, "citacionTM":"05:32", "citacionTT":"12:45"},
-{"numeroDeTurno": 18, "citacionTM":"05:35", "citacionTT":"12:57"},
-{"numeroDeTurno": 19, "citacionTM":"05:36", "citacionTT":"12:40"},
-{"numeroDeTurno": 20, "citacionTM":"05:45", "citacionTT":"13:49"}
+    {"numeroDeTurno": "3", "citacionTM":"04:06", "citacionTT":"11:25"},
+    {"numeroDeTurno": "5", "citacionTM":"04:22", "citacionTT":"11:51"},
+    {"numeroDeTurno": "8", "citacionTM":"04:48", "citacionTT":"12:28"},
+    {"numeroDeTurno": "9", "citacionTM":"04:52", "citacionTT":"12:49"},
+    {"numeroDeTurno": "12", "citacionTM":"05:15", "citacionTT":"13:25"},
+    {"numeroDeTurno": "13", "citacionTM":"05:18", "citacionTT":"13:55"},
+    {"numeroDeTurno": "15", "citacionTM":"05:26", "citacionTT":"14:50"},
+    {"numeroDeTurno": "16", "citacionTM":"05:30", "citacionTT":"13:13"},
+    {"numeroDeTurno": "17", "citacionTM":"05:32", "citacionTT":"12:45"},
+    {"numeroDeTurno": "18", "citacionTM":"05:35", "citacionTT":"12:57"},
+    {"numeroDeTurno": "19", "citacionTM":"05:36", "citacionTT":"12:40"},
+    {"numeroDeTurno": "20", "citacionTM":"05:45", "citacionTT":"13:49"}
 ]

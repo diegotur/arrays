@@ -43,9 +43,9 @@
     {"apellido":"Navarro","nombre":"Fernando Omar","legajo":"2989","turno": "Tarde","coche":"14","cabecera": "Puente Uriburu", "consulta": 0},
     {"apellido":"Derettis","nombre":"Alejandro Omar","legajo":"2715","turno": "Mañana","coche":"57","cabecera": "Talar", "consulta": 0},
     {"apellido":"Solis","nombre":"José Luis","legajo":"2741","turno": "Tarde","coche":"57","cabecera": "Talar", "consulta": 0},
-    {"apellido":"Benitez","nombre":"Ezequiel","legajo":"3035","turno": "Mañana","coche":"15","cabecera": "Puente Uriburu", "consulta": 0},
-    {"apellido":"Pujol","nombre":"Ruben","legajo":"3038","turno": "Tarde","coche":"15","cabecera": "Puente Uriburu", "consulta": 0},
-    {"apellido":"Vallory","nombre":"Diego","legajo":"2623","turno": "Mañana","coche":"59","cabecera": "Talar", "consulta": 0},
-    {"apellido":"Diyorio","nombre":"Juan","legajo":"2656","turno": "Tarde","coche":"59","cabecera": "Talar", "consulta": 0}
+    {"apellido":"Benitez","nombre":"Eduardo","legajo":"3035","turno": "Mañana","coche":"15","cabecera": "Puente Uriburu", "consulta": 0},
+    {"apellido":"Pujol","nombre":"Ruben Alberto","legajo":"3038","turno": "Tarde","coche":"15","cabecera": "Puente Uriburu", "consulta": 0},
+    {"apellido":"Vallory","nombre":"Javier Alejandro","legajo":"2623","turno": "Mañana","coche":"59","cabecera": "Talar", "consulta": 0},
+    {"apellido":"Diyorio","nombre":"Ángel Andrés","legajo":"2656","turno": "Tarde","coche":"59","cabecera": "Talar", "consulta": 0}
     
     ]

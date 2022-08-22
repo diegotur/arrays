@@ -5,19 +5,21 @@ let cantConsultasPuente = JSON.parse(localStorage.getItem ("cantConsultasPuente"
 let cantConsultasTalar = JSON.parse(localStorage.getItem ("cantConsultasTalar"))??0;
 
 
+async function ValidarChoferes (){
 
-if (choferes.length == 0){
-    fetch("choferes.json")
+    await fetch("choferes.json")
     .then(response => response.json())
     .then(j =>{
-    
-    for (i=0;i<j.length;i++){
-        choferes[i]=j[i];
-        
+        if (choferes.length != j.length){
+            
+            for (i=0;i<j.length;i++){
+                choferes[i]=j[i];
+            }
+        }
+    })
 }
-})
-}
-    
+ValidarChoferes();
+
 const turnos = [];
 const talarTurnos = [];
 let modeloCit = [];
@@ -59,14 +61,14 @@ async function GenerarCitaciones (a, b, c, d, e){
         d[0]= b[diaLunes];
         e[0]= c[diaLunesTalar];
 
-            for (i=0; i<4; i++){
+            for (i=0; i<b.length-1; i++){
                 let y = d[0].at(i);
                 let x = d[i].map((n) => n);
                 x.shift();
                 x.push(y);
                 d[i + 1] = x;
                 }
-            for (i=0; i<4; i++){
+            for (i=0; i<c.length-1; i++){
                 let y = e[0].at(i);
                 let x = e[i].map((n) => n);
                 x.shift();
@@ -81,80 +83,33 @@ GenerarCitaciones ("parque.json", modeloCit, talarModeloCit, citSemana, talarCit
 let turnosAsignados = [];
 let talarTurnosAsignados = [];
 
-let citacionPuente = document.getElementById("citacionPuente");
-let citacionTalar = document.getElementById("citacionTalar");
-
-async function GenerarCitacionSemana (a, b, c, d){
+async function GenerarCitacionSemana (a, b, c, e){
     await fetch(b)
     .then(response => response.json())
     .then(j =>{
-    
-    for (i=0;i<a.length;i++){
-        for (p=0;p<a[i].length;p++){
-            c[p] = {
-                ...j[p],
-                cocheLunes: a[0].at(p),
-                cocheMartes: a[1].at(p),
-                cocheMiercoles: a[2].at(p),
-                cocheJueves: a[3].at(p),
-                cocheViernes: a[4].at(p)
+        let ind = 0;
+        for (const elem of j){
+            e[ind]= [elem.numeroDeTurno, elem.citacionTM, elem.citacionTT];
+            ind++;
+        }
+        for (i=0;i<a.length;i++){
+            e[i].push(a[i][0],a[i][1],a[i][2],a[i][3],a[i][4]);
+        }
+        for (const item of e){
+            for (i=0; i<item.length; i++){
+                let llenar = document.getElementById(c);
+                const node = document.createElement("div");
+                const textnode = document.createTextNode(item.at(i));
+                node.classList.add('styleDiv');
+                node.appendChild(textnode);
+                llenar.appendChild(node);
             }
-        } 
-    }
-})
-
-for (const item of c){
-    let {numeroDeTurno, citacionTM, citacionTT, cocheLunes, cocheMartes, cocheMiercoles, cocheJueves, cocheViernes} = item; 
-    
-        let llenar = d;
-        const node = document.createElement("div");
-        const textnode = document.createTextNode(numeroDeTurno);
-        node.classList.add('styleDiv');
-        node.appendChild(textnode);
-        llenar.appendChild(node);
-        const node1 = document.createElement("div");
-        const textnode1 = document.createTextNode(citacionTM);
-        node1.classList.add('styleDiv');
-        node1.appendChild(textnode1);
-        llenar.appendChild(node1);
-        const node2 = document.createElement("div");
-        const textnode2 = document.createTextNode(citacionTT);
-        node2.classList.add('styleDiv');
-        node2.appendChild(textnode2);
-        llenar.appendChild(node2);
-        const node3 = document.createElement("div");
-        const textnode3 = document.createTextNode(cocheLunes);
-        node3.classList.add('styleDiv');
-        node3.appendChild(textnode3);
-        llenar.appendChild(node3);
-        const node4 = document.createElement("div");
-        const textnode4 = document.createTextNode(cocheMartes);
-        node4.classList.add('styleDiv');
-        node4.appendChild(textnode4);
-        llenar.appendChild(node4);
-        const node5 = document.createElement("div");
-        const textnode5 = document.createTextNode(cocheMiercoles);
-        node5.classList.add('styleDiv');
-        node5.appendChild(textnode5);
-        llenar.appendChild(node5);
-        const node6 = document.createElement("div");
-        const textnode6 = document.createTextNode(cocheJueves);
-        node6.classList.add('styleDiv');
-        node6.appendChild(textnode6);
-        llenar.appendChild(node6);
-        const node7 = document.createElement("div");
-        const textnode7 = document.createTextNode(cocheViernes);
-        node7.classList.add('styleDiv');
-        node7.appendChild(textnode7);
-        llenar.appendChild(node7);
+        }
+    })
 }
-} 
 
-GenerarCitacionSemana(citSemana, "turnos.json", turnosAsignados, citacionPuente);
-GenerarCitacionSemana(talarCitSemana, "talarTurnos.json", talarTurnosAsignados, citacionTalar);
-
-
-
+GenerarCitacionSemana(citSemana, "turnos.json", "citacionPuente", turnosAsignados);
+GenerarCitacionSemana(talarCitSemana, "talarTurnos.json", "citacionTalar", talarTurnosAsignados);
 
 function VerCitacion (a,b,c,d){
     a.style.visibility = "visible";
@@ -201,16 +156,17 @@ function VerEstadistica(){
             let getIn = choferes.findIndex ((el) => el.legajo == inputLegajo);
             let {nombre, apellido, turno, coche, cabecera} = choferes[getIn];
             let cab = (cabecera == "Puente Uriburu")?turnosAsignados:talarTurnosAsignados;
-            let cocheCitL = cab.findIndex ((el) => el.cocheLunes == coche);
-            let cocheCitM = cab.findIndex ((el) => el.cocheMartes == coche);
-            let cocheCitMM = cab.findIndex ((el) => el.cocheMiercoles == coche);
-            let cocheCitJ = cab.findIndex ((el) => el.cocheJueves == coche);
-            let cocheCitV = cab.findIndex ((el) => el.cocheViernes == coche);
-            let turnoCitL = (turno == "Mañana")?cab[cocheCitL].citacionTM:cab[cocheCitL].citacionTT;
-            let turnoCitM = (turno == "Mañana")?cab[cocheCitM].citacionTM:cab[cocheCitM].citacionTT;
-            let turnoCitMM = (turno == "Mañana")?cab[cocheCitMM].citacionTM:cab[cocheCitMM].citacionTT;
-            let turnoCitJ = (turno == "Mañana")?cab[cocheCitJ].citacionTM:cab[cocheCitJ].citacionTT;
-            let turnoCitV = (turno == "Mañana")?cab[cocheCitV].citacionTM:cab[cocheCitV].citacionTT;
+            let cocheCitL = cab.findIndex ((el) => el.at(3) == coche);
+            let cocheCitM = cab.findIndex ((el) => el.at(4) == coche);
+            let cocheCitMM = cab.findIndex ((el) => el.at(5) == coche);
+            let cocheCitJ = cab.findIndex ((el) => el.at(6) == coche);
+            let cocheCitV = cab.findIndex ((el) => el.at(7) == coche);
+            
+            let turnoCitL = (turno == "Mañana")?cab[cocheCitL].at(1):cab[cocheCitL].at(2);
+            let turnoCitM = (turno == "Mañana")?cab[cocheCitM].at(1):cab[cocheCitM].at(2);
+            let turnoCitMM = (turno == "Mañana")?cab[cocheCitMM].at(1):cab[cocheCitMM].at(2);
+            let turnoCitJ = (turno == "Mañana")?cab[cocheCitJ].at(1):cab[cocheCitJ].at(2);
+            let turnoCitV = (turno == "Mañana")?cab[cocheCitV].at(1):cab[cocheCitV].at(2);
             choferes[getIn].consulta++;
             localStorage.setItem ("choferes", JSON.stringify (choferes));
             
